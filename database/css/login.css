@@ -7,7 +7,6 @@
 .wrapper{
     display: grid;
     grid-template-rows: auto 1fr auto;
-    border: 1px solid red;
     min-height: 100vh;
 }
 header{
@@ -16,8 +15,8 @@ header{
     align-items: center;
     width: 100%;
     padding: 20px;
-    background-color: rgb(0, 0, 116);
-    color: aliceblue;
+    background-color: #000074;
+    color: #f0f8ff;
 }
 .main-content{
     width: 100%;
@@ -65,7 +64,7 @@ form{
 
 input[type="text"],
 input[type="password"] {
-    width: 100%; /* Makes input fields stretch */
+    width: 20vw; /* Makes input fields stretch */
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -83,7 +82,10 @@ input[type="submit"]{
     0 10px 10px rgba(64, 64, 64, 0.22),
     0 0 120px -10px rgb(37, 22, 249);
 }
-
+.php_error p{
+    font-weight: 800;
+    color: red;
+}
 input[type="submit"]:hover{
     background-color: rgb(0, 0, 77);
 
@@ -94,6 +96,24 @@ input[type="submit"]:hover{
     justify-content: center;
     flex-direction: column;
     gap: 10px;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    width: 20vw;
+    padding-right: 40px; /* Space for the icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    user-select: none;
 }
 
 footer{
