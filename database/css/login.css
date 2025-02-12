@@ -1,0 +1,108 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    border: 1px solid red;
+    min-height: 100vh;
+}
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: rgb(0, 0, 116);
+    color: aliceblue;
+}
+.main-content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25vw;
+    height: 400px;
+    box-shadow: 0px 0px 150px 19px rgba(235,127,235,0.71);
+    border-radius: 24px;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.main-content .card .card__title{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    height: 80%;
+
+}
+form{
+    width: 100%;
+}
+.field__title {
+    align-self: flex-start; /* Aligns text to the left */
+    font-weight: 600;
+    width: 100%; /* Ensures it matches the input field width */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%; /* Makes input fields stretch */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"]{
+    border: none;
+    background-color: blue;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 6px;
+    cursor: hand;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 14px 28px rgba(64, 64, 64, 0.25),
+    0 10px 10px rgba(64, 64, 64, 0.22),
+    0 0 120px -10px rgb(37, 22, 249);
+}
+
+input[type="submit"]:hover{
+    background-color: rgb(0, 0, 77);
+
+}
+.form__field{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+footer{
+    background-color: rgb(0, 0, 116);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    color: aliceblue;
+}
+

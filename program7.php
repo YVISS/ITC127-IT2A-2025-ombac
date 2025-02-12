@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lecture 6: HTML FORM VALIDATION</title>
     <link rel="stylesheet" href="css/modern-normalize.css">
-    <link rel="stylesheet" href="css/p5.css">
+    <link rel="stylesheet" href="css/p7.css">
 
 </head>
 
@@ -34,7 +34,6 @@
 
 </html>
 <?php
-
     function validateInput1(){
         $errorInput1 = 0;
         //validate input 1
@@ -42,7 +41,7 @@
             echo "<br><font color='red'> First Input is empty!</font><br>";
             $errorInput1++;
         }
-        else if(!is_numeric($_GET['txtinput1'])){
+        else if(!is_numeric($_GET['txtinput2'])){
             echo "<br><font color='red'> First Input is not a number!</font><br>";
             $errorInput1++;
         }
