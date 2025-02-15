@@ -1,0 +1,84 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #000074;
+    color: #f0f8ff;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+.session{
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack child elements in a column */
+    align-items: flex-start; /* Align text to the left */
+    justify-content: center; /* Center vertically */
+    padding: 20px;
+
+}
+.form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1;
+    gap: 20px;
+}
+
+.form__btns{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+
+.form__btns button{
+    padding: 10px;
+    width: auto;
+    height: 4vh;
+    background-color: orange;
+    border-radius: 6px;
+    border: 1px solid orange;
+    transition: 0.3s ease-in-out;
+}
+
+.form__btns button:hover{
+    transform: translateY(-3px);
+    background-color: orangered;
+    border: 1px solid orangered;
+    
+}
+
+.form__btns a{
+    color: black;
+}
+.main-content{
+    display: flex;
+    justify-content: center; /* Stack elements in a column */
+    align-items: center; /* Center content horizontally */
+    gap: 20px; /* Add spacing between sections */
+    flex-direction: column;
+    width: 100%;
+}
+footer{
+    background-color: rgb(0, 0, 116);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    color: aliceblue;
+}
