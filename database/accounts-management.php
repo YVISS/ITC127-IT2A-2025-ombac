@@ -71,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
             <div class="page-title">
                 <h1>Accounts Management</h1><br>
                 <p style="text-align: center;">Create, Update, and Delete Accounts</p>
-                <div id="php_error" class="error" style="text-align: center;"><?php echo $msg;?></div>
             </div>
             <div class="form section">
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
@@ -141,14 +140,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
             <p>&copy; <span id="year"></span> AU Technical Support Management System. All Rights Reserved.</p>
         </footer>
     </div>
-
-    <!-- Modal -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Create a New Account</h2>
             <div id="php_error" class="error">
-
+                <?php echo $msg ;?>
             </div>
             <form id="createAccountForm" method="POST">
                 <input type="text" name="txtusername" placeholder="Username" required><br>
@@ -175,13 +172,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
         </div>
     </div>
 
+    <!-- Modal -->
+    
+
 </body>
 
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
     let errormsg = document.getElementById("php_error");
-    errormsg.style.color = "red";
-    errormsg.style.fontWeight = 400;
     // Show password
     function togglePassword() {
         let passwordInput = document.getElementById("password");
@@ -217,21 +215,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
         }
     });
 
-    // Handle form submission without reloading the page
-    document.getElementById("createAccountForm").addEventListener("submit", function(event) {
 
-        const formData = new FormData(this);
 
-        fetch("", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("php_error").innerHTML = data;
-            })
-            .catch(error => console.error("Error:", error));
-    });
 </script>
 
 </html>

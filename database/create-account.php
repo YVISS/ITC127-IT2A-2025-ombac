@@ -30,7 +30,7 @@ if (isset($_POST['btncreate'])) {
                     }
                 }
             } else {
-                $msg = "Username already exists";
+                $msg = "<font color='red'>Username already exists</font>";
             }
         }
     } else {

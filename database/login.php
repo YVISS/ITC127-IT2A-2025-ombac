@@ -52,6 +52,7 @@ if (isset($_POST['btnlogin'])) {
             <h1>AU Techincal Support Management System</h1>
         </header>
         <div class="main-content">
+            
             <div class="card">
                 <h1 class="card__title">Log In</h1><br>
                 <div name="php_error" id="php_error">

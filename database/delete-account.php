@@ -20,9 +20,6 @@ if (isset($_GET['id'])) {
             exit();
         }
     }
-
-    // Close statement
-    mysqli_stmt_close($stmt);
 } else {
     // Check if the ID parameter is missing
     header("location: accounts-management.php?msg=Missing account ID");
@@ -31,4 +28,5 @@ if (isset($_GET['id'])) {
 
 // Close connection
 mysqli_close($link);
+
 ?>
