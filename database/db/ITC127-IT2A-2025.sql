@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 12, 2025 at 03:10 PM
+-- Generation Time: Mar 05, 2025 at 04:15 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -42,8 +42,7 @@ CREATE TABLE `tblaccounts` (
 
 INSERT INTO `tblaccounts` (`username`, `password`, `usertype`, `status`, `createdby`, `datecreated`) VALUES
 ('admin', '123456', 'ADMINISTRATOR', 'ACTIVE', 'admin', '02/12/2025'),
-('staff', '123456', 'STAFF', 'ACTIVE', 'admin', '02/12/2025'),
-('tech', '123456', 'TECHNICAL', 'ACTIVE', 'admin', '02/12/2025');
+('test3', '123456', 'TECHNICAL', 'ACTIVE', 'admin', '05/03/2025');
 
 -- --------------------------------------------------------
 
