@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
 
                 $sql = "INSERT INTO tblaccounts (username, password, usertype, status, createdby, datecreated) VALUES (?, ?, ?, ?, ?,?)";
                 if ($stmt = mysqli_prepare($link, $sql)) {
-
                     $username = $_POST['txtusername'];
                     $password = $_POST['txtpassword'];
                     $usertype = $_POST['cmbtype'];
@@ -101,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
                             echo "<td>" . $row['status'] . "</td>";
                             echo "<td>" . $row['createdby'] . "</td>";
                             echo "<td>" . $row['datecreated'] . "</td>";
-                            echo "<td><a href='update-account.php?id=" . $row['username'] . "'>Update</a> | <a href='delete-account.php?id=" . $row['username'] . "'>Delete</a></td>";
+                            echo "<td><a href='update-account.php?id=".$row['username']."'>Update</a> | <a href='delete-account.php?id=" . $row['username'] . "'>Delete</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>";

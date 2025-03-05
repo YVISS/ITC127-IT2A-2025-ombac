@@ -98,16 +98,6 @@ input[type="submit"]:hover{
     gap: 10px;
 }
 
-.password-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.password-container input {
-    width: 20vw;
-    padding-right: 40px; /* Space for the icon */
-}
 
 .toggle-password {
     position: absolute;
