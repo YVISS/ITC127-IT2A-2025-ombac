@@ -1,6 +1,5 @@
 <?php
 
-use Dom\Mysql;
 
 require_once 'config.php';
 include "session-checker.php";
@@ -12,7 +11,7 @@ if (isset($_POST['btnsubmit'])) {
         $username = trim($_POST['txtusername']);
         mysqli_stmt_bind_param($stmt, "s", $username);
         if(mysqli_stmt_execute($stmt)){
-            $sql = "INSERT INTO tbllogs (datelog, timelog, action, module, performedto, performedby) VALUES (?,?,?,?,?,?)";
+            $sql = "INSERT INTO tbllogs (datelog, timelog, action, module, performedby, performedto) VALUES (?,?,?,?,?,?)";
             if($stmt = mysqli_prepare($link, $sql)){
                 $date = date("d/m/Y");
                 $time = date("h:i:sa");

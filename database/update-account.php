@@ -6,22 +6,27 @@
     if(isset($_POST['btnsubmit']))
     {
         $sql = "UPDATE tblaccounts SET password =?, usertype =?, status = ? WHERE username=?";
-        if ($stmt = mysqli_prepare($link, $sql)) {
+        if ($stmt = mysqli_prepare($link, $sql)) 
+        {
             mysqli_stmt_bind_param($stmt, "ssss", $_POST['txtpassword'], $_POST['cmbtype'], $_POST['rbstatus'], $_GET['username']);
-            if($stmt = mysqli_prepare($link, $sql)){
-                $date = date('d/m/Y');
-                $time = date("h:i:sa");
-                $action = "Update";
-                $module = "Accounts Management";
-                mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $_GET['username'], $_SESSION['username']);
-                if(mysqli_stmt_execute($stmt)){
-                    echo "User Account Updated.";
-                    header("location: accounts-management.php");
-                    exit();
+            if(mysqli_stmt_execute($stmt)){
+                $sql = "INSERT INTO tbllogs (datelog, timelog, action, module, performedto, performedby) VALUES (?,?,?,?,?,?)";
+                if($stmt = mysqli_prepare($link, $sql))
+                {
+                    $date = date('d/m/Y');
+                    $time = date("h:i:sa");
+                    $action = "Update";
+                    $module = "Accounts Management";
+                    mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $_GET['username'], $_SESSION['username']);
+                    if(mysqli_stmt_execute($stmt)){
+                        echo "User Account Updated";
+                        header("location: accounts-management.php");
+                        exit();
+                    }
                 }
-            }
-            else{
-                echo "<font color ='red'>ERROR: Inserting logs</font>";
+                else{
+                    echo "<font color ='red'>ERROR: Inserting logs</font>";
+                }
             }
         }
         else{
@@ -32,26 +37,14 @@
         if(isset($_GET['username']) && !empty(trim($_GET['username']))){
             $sql = "SELECT * FROM tblaccounts WHERE username = ?";
             if($stmt = mysqli_prepare($link, $sql)){
-                mysqli_stmt_bind_param($stmt,"s", $_GET['username']);
+                mysqli_stmt_bind_param($stmt, "s", $_GET['username']);
                 if(mysqli_stmt_execute($stmt)){
                     $result = mysqli_stmt_get_result($stmt);
-                    if(mysqli_num_rows($result) > 0) {
-                        $account = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                    } else {
-                        echo "<font color='red'>ERROR: No account found with this username.</font>";
-                        $account = null;
-                    }
-                } else {
-                    echo "<font color='red'>ERROR: Query execution failed.</font>";
-                    $account = null;
+                    $account = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 }
-            } else {
-                echo "<font color='red'>ERROR: Failed to prepare statement.</font>";
-                $account = null;
+            }else{
+                echo "<font color = 'red'>ERROR: Loading Account</font>";
             }
-        } else {
-            echo "<font color='red'>ERROR: Username parameter is missing.</font>";
-            $account = null;
         }
         
     }
