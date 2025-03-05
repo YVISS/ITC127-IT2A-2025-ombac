@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
                             echo "<td>" . $row['status'] . "</td>";
                             echo "<td>" . $row['createdby'] . "</td>";
                             echo "<td>" . $row['datecreated'] . "</td>";
-                            echo "<td><a href='update-account.php?id=".$row['username']."'>Update</a> | <a href='delete-account.php?id=" . $row['username'] . "'>Delete</a></td>";
+                            echo "<td><a href='update-account.php?username=".$row['username']."'>Update</a> | <a href='delete-account.php?username=" . $row['username'] . "'>Delete</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>";

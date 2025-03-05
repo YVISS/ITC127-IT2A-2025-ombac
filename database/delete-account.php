@@ -1,36 +1,40 @@
 <?php
-require_once "config.php";
-include ("session-checker.php");
-$msg = "";
-if(isset($_POST['btnsubmit'])) {
-    
-    $sql = "DELETE FROM tblaccounts WHERE username = ?";
-    if ($stmt = mysqli_prepare($link, $sql)) {
-        mysqli_stmt_bind_param($stmt, "s", trim($_POST['txtusername']));
-        if (mysqli_stmt_execute($stmt)) {
-            $sql = "INSERT INTO tbllogs (datelog, timelog, action, module, performedto, performedby) VALUES (?, ?, ?, ?, ?, ?)";
-            
-            if ($stmt = mysqli_prepare($link, $sql)) {
+
+use Dom\Mysql;
+
+require_once 'config.php';
+include "session-checker.php";
+include "errors.php";
+if (isset($_POST['btnsubmit'])) {
+    $sql = "DELETE FROM tblaccounts WHERE username =?";
+    if($stmt = mysqli_prepare($link, $sql)){
+
+        $username = trim($_POST['txtusername']);
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        if(mysqli_stmt_execute($stmt)){
+            $sql = "INSERT INTO tbllogs (datelog, timelog, action, module, performedto, performedby) VALUES (?,?,?,?,?,?)";
+            if($stmt = mysqli_prepare($link, $sql)){
                 $date = date("d/m/Y");
                 $time = date("h:i:sa");
                 $action = "Delete";
                 $module = "Accounts Management";
-                
-                mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $_POST['txtusername'], $_SESSION['username']);
-
-                if (mysqli_stmt_execute($stmt)) {
-                    $msg.= "User account is deleted.";
-                    header("Location: accounts-management.php");
+                mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $username, $_SESSION['username']);
+                if(mysqli_stmt_execute($stmt)){
+                    echo "User Account Deleted";
+                    header("location: accounts-management.php");
                     exit();
-                } else {
-                    $msg.= "<font color='red'>ERROR on inserting delete log.</font>";
                 }
             }
-        } else {
-            $msg.= "<font color='red'>ERROR on delete statement.</font>";
+            else{
+                echo "<font color = 'red'>ERROR: Inserting on Logs</font>";
+            }
         }
     }
+    else{
+        echo "<font color = 'red'>ERROR: Deleting Account</font>";
+    }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -42,8 +46,7 @@ if(isset($_POST['btnsubmit'])) {
 </head>
 <body>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
-        
-        <input type="hidden" name="txtusername" value="<?php echo trim($_GET['username']); ?>">
+        <input type="hidden" name="txtusername" value="<?php echo trim($_GET['username']); ?>"/>
         <p>Are you sure you want to delete this account?</p>
         <input type="submit" value="Yes" name="btnsubmit">
         <a href="accounts-management.php">No</a>
