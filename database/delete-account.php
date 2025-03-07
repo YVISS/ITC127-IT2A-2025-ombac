@@ -8,8 +8,7 @@ if (isset($_POST['btnsubmit'])) {
     $sql = "DELETE FROM tblaccounts WHERE username =?";
     if($stmt = mysqli_prepare($link, $sql)){
 
-        $username = trim($_POST['txtusername']);
-        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_bind_param($stmt, "s", $_POST['txtusername']);
         if(mysqli_stmt_execute($stmt)){
             $sql = "INSERT INTO tbllogs (datelog, timelog, action, module, performedby, performedto) VALUES (?,?,?,?,?,?)";
             if($stmt = mysqli_prepare($link, $sql)){
@@ -17,7 +16,7 @@ if (isset($_POST['btnsubmit'])) {
                 $time = date("h:i:sa");
                 $action = "Delete";
                 $module = "Accounts Management";
-                mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $username, $_SESSION['username']);
+                mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $_SESSION['username'],$_POST['txtusername']);
                 if(mysqli_stmt_execute($stmt)){
                     echo "User Account Deleted";
                     header("location: accounts-management.php");

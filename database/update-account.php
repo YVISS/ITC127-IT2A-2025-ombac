@@ -10,14 +10,14 @@
         {
             mysqli_stmt_bind_param($stmt, "ssss", $_POST['txtpassword'], $_POST['cmbtype'], $_POST['rbstatus'], $_GET['username']);
             if(mysqli_stmt_execute($stmt)){
-                $sql = "INSERT INTO tbllogs (datelog, timelog, action, module, performedto, performedby) VALUES (?,?,?,?,?,?)";
+                $sql = "INSERT INTO tbllogs (datelog, timelog, action, module, performedby, performedto) VALUES (?,?,?,?,?,?)";
                 if($stmt = mysqli_prepare($link, $sql))
                 {
                     $date = date('d/m/Y');
                     $time = date("h:i:sa");
                     $action = "Update";
                     $module = "Accounts Management";
-                    mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $_GET['username'], $_SESSION['username']);
+                    mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $_SESSION['username'],$_GET['username']);
                     if(mysqli_stmt_execute($stmt)){
                         echo "User Account Updated";
                         header("location: accounts-management.php");
