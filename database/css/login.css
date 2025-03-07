@@ -99,11 +99,28 @@ input[type="submit"]:hover{
 }
 
 
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 40px; /* Leaves space for the eye icon */
+    height: 40px;
+}
+
 .toggle-password {
     position: absolute;
     right: 10px;
     cursor: pointer;
     user-select: none;
+    font-size: 18px;
+}
+
+.toggle-password svg{
 }
 
 footer{
