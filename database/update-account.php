@@ -56,47 +56,100 @@ if (isset($_POST['btnsubmit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/modern-normalize.css">
+    <link rel="stylesheet" href="css/update-account.css">
     <title>Update Account Page - AU Technical Support Management System</title>
 </head>
 
 <body>
-    <p>Change the value on this form and submit to update the account</p>
-    <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="POST">
-        Username: <?php echo $account['username']; ?><br>
-        Password: <input id="password" type="password" name="txtpassword" value="<?php echo $account['password']; ?>" required><br>
-        <span class="toggle-password" onclick="togglePassword()">
-            <div id="togglePassIcon">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EEEEE">
-                    <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
-                </svg>
+    <div class="wrapper">
+        <header>
+            <h1>AU TSMS</h1>
+            <div class="session section">
+                <?php
+                //check if session is recorded
+                if ($_SESSION['username']) {
+                    echo $_SESSION['username'] . " | ";
+                    echo $_SESSION['usertype'];
+                } else {
+                    header("location: login.php");
+                }
+                ?>
+            </div>
+        </header>
+        <div class="main-content">
+            <div class="page-title">
+                <h1>Update Account</h1><br>
+                <p style="text-align: center;">Change the value on this form and submit to update the account</p>
+            </div>
+            <div class="form">
+                <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="POST">
+                    <div class="formUserInfo">
+                        <h2>User Information</h2>
+                        <div class="usernameInfo">
+                            <span class="username">Username:</span> <?php echo $account['username']; ?>
+                        </div>
+                        <div class="passwordInput">
+                            <span class="password">Password:</span> <input id="password" type="password" name="txtpassword" value="<?php echo $account['password']; ?>" required>
+                            <span class="toggle-password" onclick="togglePassword()">
+                                <div id="togglePassIcon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EEEEE">
+                                        <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
+                                    </svg>
+                                </div>
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="formUserType">
+
+                        <h2>User Types</h2>
+                        <div class="currentType">
+                            <span class="currentUserType">Current Usertype:</span> <?php echo $account['usertype']; ?><br>
+                        </div>
+                        <div class="changeType">
+                            <span class="changeUserType">Change Usertype To:</span> <select name="cmbtype" id="cmbtype" required>
+                                <option value="">--Select Account Type--</option>
+                                <option value="ADMINISRTATOR">Administrator</option>
+                                <option value="TECHNICAL">Technical</option>
+                                <option value="STAFF">Staff</option>
+                            </select>
+                        </div>
+                        <div class="status">
+                            
+                        Status: <br>
+                        <?php
+                        $status = $account['status'];
+                        if ($status == 'ACTIVE') {
+                        ?><input type="radio" name="rbstatus" value="ACTIVE" checked>Active<br>
+                            <input type="radio" name="rbstatus" value="INACTIVE">Inactive<br> <?php
+                                                                                            } else {
+                                                                                                ?><input type="radio" name="rbstatus" value="ACTIVE">Active<br>
+                            <input type="radio" name="rbstatus" value="INACTIVE" checked>Inactive<br> <?php
+                                                                                                    }
+                                                                                                        ?>
+                        </div> 
+                    </div>
+                    <div class="submissions">
+                        <input type="submit" name="btnsubmit" value="Submit">
+                        <a href="accounts-management.php">Cancel</a>
+                    </div>
+
+                </form>
             </div>
 
-        </span>
-        Current Usertype: <?php echo $account['usertype']; ?><br>
-        Change Usertype To: <select name="cmbtype" id="cmbtype" required>
-            <option value="">--Select Account Type--</option>
-            <option value="ADMINISRTATOR">Administrator</option>
-            <option value="TECHNICAL">Technical</option>
-            <option value="STAFF">Staff</option>
-        </select><br>
-        Status: <br>
-        <?php
-        $status = $account['status'];
-        if ($status == 'ACTIVE') {
-        ?><input type="radio" name="rbstatus" value="ACTIVE" checked>Active<br>
-            <input type="radio" name="rbstatus" value="INACTIVE">Inactive<br> <?php
-                                                                            } else {
-                                                                                ?><input type="radio" name="rbstatus" value="ACTIVE">Active<br>
-            <input type="radio" name="rbstatus" value="INACTIVE" checked>Inactive<br> <?php
-                                                                                    }
-                                                                                        ?>
-        <input type="submit" name="btnsubmit" value="Submit">
-        <a href="accounts-management.php">Cancel</a>
+        </div>
+        <footer>
+            <p>&copy; <span id="year"></span> AU Technical Support Management System. All Rights Reserved.</p>
+        </footer>
 
-    </form>
+    </div>
+
 </body>
 
 <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
     function togglePassword() {
         let passwordInput = document.getElementById("password");
         if (passwordInput.type === "password") {

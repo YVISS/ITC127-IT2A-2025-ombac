@@ -36,7 +36,6 @@ header h1{
     padding: 20px;
     font-size: 1vw;
     flex-direction: column;
-
 }
 .form{
     display: flex;
