@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2025 at 04:15 AM
+-- Generation Time: Mar 18, 2025 at 04:42 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -41,8 +41,27 @@ CREATE TABLE `tblaccounts` (
 --
 
 INSERT INTO `tblaccounts` (`username`, `password`, `usertype`, `status`, `createdby`, `datecreated`) VALUES
-('admin', '123456', 'ADMINISTRATOR', 'ACTIVE', 'admin', '02/12/2025'),
-('test3', '123456', 'TECHNICAL', 'ACTIVE', 'admin', '05/03/2025');
+('admin', '123456', 'ADMINISTRATOR', 'ACTIVE', 'admin', '02/12/2025');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblequipments`
+--
+
+CREATE TABLE `tblequipments` (
+  `assetnumber` varchar(40) NOT NULL,
+  `serialnumber` varchar(50) NOT NULL,
+  `equipmenttype` varchar(50) NOT NULL,
+  `manufacturer` varchar(50) NOT NULL,
+  `yearmodel` varchar(100) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `branch` varchar(50) NOT NULL,
+  `department` varchar(50) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `createdby` varchar(50) NOT NULL,
+  `datecreated` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -54,10 +73,23 @@ CREATE TABLE `tbllogs` (
   `datelog` varchar(20) NOT NULL,
   `timelog` varchar(20) NOT NULL,
   `action` varchar(10) NOT NULL,
-  `module` varchar(15) NOT NULL,
-  `perfomedby` varchar(50) NOT NULL,
+  `module` varchar(50) NOT NULL,
+  `performedby` varchar(50) NOT NULL,
   `performedto` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbllogs`
+--
+
+INSERT INTO `tbllogs` (`datelog`, `timelog`, `action`, `module`, `performedby`, `performedto`) VALUES
+('12/03/2025', '08:00:29am', 'Update', 'Accounts Management', 'admin', 'test1'),
+('12/03/2025', '08:34:59am', 'Update', 'Accounts Management', 'admin', 'test1'),
+('12/03/2025', '08:35:02am', 'Delete', 'Accounts Management', 'admin', 'test1'),
+('12/03/2025', '08:59:00am', 'Update', 'Accounts Management', 'admin', 'test1'),
+('12/03/2025', '08:59:24am', 'Delete', 'Accounts Management', 'admin', 'test1'),
+('12/03/2025', '08:59:49am', 'Update', 'Accounts Management', 'admin', 'test1'),
+('12/03/2025', '08:59:58am', 'Delete', 'Accounts Management', 'admin', 'test1');
 
 --
 -- Indexes for dumped tables
@@ -68,6 +100,12 @@ CREATE TABLE `tbllogs` (
 --
 ALTER TABLE `tblaccounts`
   ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `tblequipments`
+--
+ALTER TABLE `tblequipments`
+  ADD PRIMARY KEY (`assetnumber`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
