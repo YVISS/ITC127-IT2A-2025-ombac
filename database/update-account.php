@@ -2,6 +2,8 @@
 require_once "config.php";
 include "session-checker.php";
 include "errors.php";
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 
 $updatemsg = '';
 $errormsg = '';
@@ -23,7 +25,7 @@ if (isset($_POST['btnsubmit'])) {
                     exit();
                 }
             } else {
-                $errormsg = "<font color ='red'>ERROR: Inserting logs</font>";
+                $errormsg = "ERROR: Inserting logs";
                 header("location: accounts-management.php?errormsg=" . urlencode($errormsg));
                 exit();
             }
