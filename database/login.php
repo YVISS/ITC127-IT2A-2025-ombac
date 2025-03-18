@@ -24,7 +24,7 @@ if (isset($_POST['btnlogin'])) {
                 $_SESSION['username'] = $account['username'];
                 $_SESSION['usertype'] = $account['usertype'];
                 //redirect to accounts page
-                header("location: accounts-management.php");
+                header("location: equipment-management.php");
             } else {
                 $msg .= "Incorrect login details or account is inactive";
             }

@@ -4,8 +4,6 @@ include 'session-checker.php';
 $updatemsg ='';
 $errormsg = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
-
-
     //check existing user
     $sql = "SELECT * FROM tblaccounts WHERE username = ?";
     if ($stmt = mysqli_prepare($link, $sql)) {
@@ -91,8 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
             <div class="form section">
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
                     <div class="form__btns">
-                        <button id="openModalBtn" type="button">Create Account</button>
-                        <button><a href="logout.php">Logout</a></button>
+                        <button type="button" onclick="window.location.href='create-account.php'">Create Account</button>
+                        <button><a href="logout.php">Logout</a></button><br>
                     </div>
                     <div class="search">
                         <input type="text" name="txtsearch" placeholder="Search...">
@@ -117,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
                             echo "<td>" . $row['status'] . "</td>";
                             echo "<td>" . $row['createdby'] . "</td>";
                             echo "<td>" . $row['datecreated'] . "</td>";
-                            echo "<td><a href='update-account.php?username=".$row['username']."'>Update</a> | <a href='delete-account.php?username=" . $row['username'] . "'>Delete</a></td>";
+                            echo "<td><a href='update-account.php?username=".$row['username']."'>Update</a> | <a href='#' onclick='confirmDelete(\"" . $row['username'] . "\")'>Delete</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>";
@@ -156,36 +154,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
             <p>&copy; <span id="year"></span> AU Technical Support Management System. All Rights Reserved.</p>
         </footer>
     </div>
-    <div id="myModal" class="modal">
+
+    <!-- Delete Account Modal -->
+    <div id="deleteModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Create a New Account</h2>
-            <form id="createAccountForm" method="POST">
-                <input type="text" name="txtusername" placeholder="Username" required><br>
-                <div style="position: relative;">
-                    <input type="password" name="txtpassword" id="password" placeholder="Password" required>
-                    <span class="toggle-password" onclick="togglePassword()">
-                        <div id="togglePassIcon">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EEEEE"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/>
-                        </svg>
-                        </div>
-                        
-                    </span>
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Delete Account</h2>
+            <p>Are you sure you want to delete this account?</p>
+            <form id="deleteForm" action="delete-account.php" method="POST">
+                <input type="hidden" name="txtusername" id="deleteUsername">
+                <div class="form__btns">
+                    <input type="submit" value="Yes" name="btnsubmit">
+                    <button type="button" onclick="closeModal()">Cancel</button>
                 </div>
-                <select name="cmbtype" id="cmbtype" required>
-                    <option value="">--Select Account Type--</option>
-                    <option value="ADMINISTRATOR">Administrator</option>
-                    <option value="TECHNICAL">Technical</option>
-                    <option value="STAFF">Staff</option>
-                </select><br>
-                <button name="btncreate" type="submit">Create Account</button>
-                <a href="accounts-management.php">Cancel</a>
             </form>
         </div>
     </div>
-
-    <!-- Modal -->
-    
 
 </body>
 
@@ -213,24 +197,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
         }
     }, 3000);
 
-    // Open modal
-    document.getElementById("openModalBtn").addEventListener("click", function() {
-        document.getElementById("myModal").style.display = "block";
-    });
+    function confirmDelete(username) {
+        document.getElementById('deleteUsername').value = username;
+        document.getElementById('deleteModal').style.display = 'block';
+    }
 
-    // Close modal
-    document.querySelector(".close").addEventListener("click", function() {
-        document.getElementById("myModal").style.display = "none";
-    });
+    function closeModal() {
+        document.getElementById('deleteModal').style.display = 'none';
+    }
 
-    // Close modal when clicking outside
-    window.addEventListener("click", function(event) {
-        if (event.target == document.getElementById("myModal")) {
-            document.getElementById("myModal").style.display = "none";
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('deleteModal')) {
+            closeModal();
         }
-    });
-
-
+    }
 
 </script>
 

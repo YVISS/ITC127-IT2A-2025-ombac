@@ -46,6 +46,7 @@ header h1 {
     justify-content: flex-start;
     gap: 20px;
     padding: 20px;
+    resize: none;
 }
 
 .form__btns {
@@ -100,6 +101,7 @@ header h1 {
 
 .form input[type="text"],
 .form input[type="password"],
+.form input[type="number"],
 .form select {
     width: 100%;
     padding: 8px;
@@ -125,21 +127,23 @@ header h1 {
     background-color: #6c757d;
 }
 
-.password-container {
-    position: relative;
-    width: 100%;
-}
-
-.password-container input[type="password"] {
-    width: 100%;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 65%;
-    transform: translateY(-50%);
+.form .toggle-password {
     cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 75%;
+    left: 13vw;
+    transform: translateY(-50%);
+}
+
+.form textarea {
+    width: 50vw;
+    height: auto;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize:both; /* Disable resizing */
 }
 
 .main-content {

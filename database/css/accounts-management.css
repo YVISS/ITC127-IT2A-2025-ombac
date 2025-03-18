@@ -70,6 +70,9 @@ header h1{
     border: 1px solid hsl(240, 100%, 70%);
 }
 .form__btns button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 10px;
     width: auto;
     height: 4vh;
@@ -213,9 +216,7 @@ body {
     border-radius: 4px;
 }
 
-.modal-content button[type="submit"],
-.modal-content a {
-    display: inline-block;
+.modal-content input[type="submit"]{
     padding: 10px 20px;
     margin: 10px 5px;
     border: none;
@@ -224,18 +225,17 @@ body {
     color: #fff;
     text-decoration: none;
     cursor: pointer;
+    transition: 0.3s ease-in-out;
 }
 
-.modal-content a {
-    background-color: #6c757d;
+.modal-content input[type="submit"]:hover{
+    background-color: hsl(240, 100%, 70%);
 }
 
-.modal-content .toggle-password {
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+
+.modal-content input[type="submit"]:hover,
+.modal-content button:hover {
+    transform: translateY(-3px);
 }
 
 .modal-content .close {
