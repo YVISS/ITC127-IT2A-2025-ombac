@@ -131,9 +131,8 @@ header h1{
 .form .toggle-password {
     cursor: pointer;
     position: absolute;
-    right: 20px;
     top: 75%;
-    left: 13vw;
+    left: 17vw;
     transform: translateY(-50%);
 }
 

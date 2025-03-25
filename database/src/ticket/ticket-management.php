@@ -5,30 +5,11 @@ include '../core/session-checker.php';
 
 $updatemsg = '';
 $errormsg = '';
-
-// Check if the search button is clicked
-if (isset($_POST['btnsearch'])) {
-    $sql = "SELECT * FROM tbltickets WHERE (ticketnumber LIKE ? OR problem LIKE ? OR status LIKE ?) AND createdby = ? ORDER BY datecreated DESC";
-    if ($stmt = mysqli_prepare($link, $sql)) {
-        $searchvalue = "%" . $_POST['txtsearch'] . "%";
-        mysqli_stmt_bind_param($stmt, "ssss", $searchvalue, $searchvalue, $searchvalue, $_SESSION['username']);
-        if (mysqli_stmt_execute($stmt)) {
-            $result = mysqli_stmt_get_result($stmt);
-        }
-    }
-} else {
-    $sql = "SELECT * FROM tbltickets WHERE createdby = ? ORDER BY datecreated DESC";
-    if ($stmt = mysqli_prepare($link, $sql)) {
-        mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
-        if (mysqli_stmt_execute($stmt)) {
-            $result = mysqli_stmt_get_result($stmt);
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,6 +17,7 @@ if (isset($_POST['btnsearch'])) {
     <link rel="stylesheet" href="../../css/tickets/ticket-management.css">
     <title>Ticket Management - AU TECHNICAL SUPPORT MANAGEMENT SYSTEM</title>
 </head>
+
 <body>
     <div class="wrapper">
         <header>
@@ -57,11 +39,12 @@ if (isset($_POST['btnsearch'])) {
                 <p style="text-align: center;">Manage your tickets here</p>
             </div>
             <div id="php_error" class="error">
-            <?php
+                <?php
                 if (isset($_GET['updatemsg'])) {
                     // Display the update status message
                     echo "<div class='msg' style=' color: green'> <svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-circle-check-filled' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z' stroke-width='0' fill='currentColor' /></svg>" . htmlspecialchars($_GET['updatemsg']) . "</div>";
-                }if(isset($_GET['errormsg'])){
+                }
+                if (isset($_GET['errormsg'])) {
                     echo '<div class="msg" style=" color: red"> <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-xbox-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10 -10 10s-10 -4.477 -10 -10s4.477 -10 10 -10m3.6 5.2a1 1 0 0 0 -1.4 .2l-2.2 2.933l-2.2 -2.933a1 1 0 1 0 -1.6 1.2l2.55 3.4l-2.55 3.4a1 1 0 1 0 1.6 1.2l2.2 -2.933l2.2 2.933a1 1 0 0 0 1.6 -1.2l-2.55 -3.4l2.55 -3.4a1 1 0 0 0 -.2 -1.4" /></svg>' . htmlspecialchars($_GET['errormsg']) . "</div>";
                 }
                 ?>
@@ -78,28 +61,61 @@ if (isset($_POST['btnsearch'])) {
             </div>
             <div class="table_component" role="region" tabindex="0">
                 <?php
-                if (mysqli_num_rows($result) > 0) {
-                    echo "<table>";
-                    echo "<tr class='headers'>";
-                    echo "<th>Ticket Number</th><th>Problem</th><th>Date Created</th><th>Status</th><th>Action</th>";
-                    echo "</tr>";
-                    while ($row = mysqli_fetch_array($result)) {
-                        echo "<tr class='row'>";
-                        echo "<td>" . $row['ticketnumber'] . "</td>";
-                        echo "<td>" . $row['problem'] . "</td>";
-                        echo "<td>" . $row['datecreated'] . "</td>";
-                        echo "<td>" . $row['status'] . "</td>";
-                        echo "<td>
-                            <a href='update-ticket.php?ticketnumber=" . $row['ticketnumber'] . "'>Update</a> |
-                            <a href='#' onclick='confirmDelete(\"" . $row['ticketnumber'] . "\")'>Delete</a> |
-                            <a href='#' onclick='viewDetails(" . json_encode($row) . ")'>Details</a>
-                        </td>";
+                function buildTable($result)
+                {
+                    if (mysqli_num_rows($result) > 0) {
+                        echo "<table>";
+                        echo "<tr class='headers'>";
+                        echo "<th>Ticket Number</th><th>Problem</th><th>Date Created</th><th>Status</th><th>Action</th>";
                         echo "</tr>";
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo "<tr class='row'>";
+                            echo "<td>" . $row['ticketnumber'] . "</td>";
+                            echo "<td>" . $row['problem'] . "</td>";
+                            echo "<td>" . $row['datecreated'] . "</td>";
+                            echo "<td>" . $row['status'] . "</td>";
+                            echo "<td>
+                                <a href='update-ticket.php?ticketnumber=" . $row['ticketnumber'] . "'>Update</a> |
+                                <a href='#' onclick='confirmDelete(\"" . $row['ticketnumber'] . "\")'>Delete</a> |
+                                <a href='#' onclick='viewDetails(" . json_encode($row) . ")'>Details</a>
+                            </td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+                    } else {
+                        echo "No record/s found";
                     }
-                    echo "</table>";
-                } else {
-                    echo "No record/s found";
                 }
+                // Check if the search button is clicked
+                if (isset($_POST['btnsearch'])) {
+                    $sql = "SELECT * FROM tbltickets WHERE ticketnumber LIKE ? OR problem LIKE ? OR status LIKE ? ORDER BY datecreated DESC";
+                    if ($stmt = mysqli_prepare($link, $sql)) {
+                        $searchvalue = "%" . $_POST['txtsearch'] . "%";
+                        mysqli_stmt_bind_param($stmt, "sss", $searchvalue, $searchvalue, $searchvalue);
+                        if (mysqli_stmt_execute($stmt)) {
+                            $result = mysqli_stmt_get_result($stmt);
+                            buildTable($result);
+                        } else {
+                            echo "<div class='error'>Error executing search query: " . mysqli_error($link) . "</div>";
+                        }
+                    } else {
+                        echo "<div class='error'>Error preparing search query: " . mysqli_error($link) . "</div>";
+                    }
+                } else {
+                    // Default query to display all tickets
+                    $sql = "SELECT * FROM tbltickets ORDER BY datecreated DESC";
+                    if ($stmt = mysqli_prepare($link, $sql)) {
+                        if (mysqli_stmt_execute($stmt)) {
+                            $result = mysqli_stmt_get_result($stmt);
+                            buildTable($result);
+                        } else {
+                            echo "<div class='error'>Error executing default query: " . mysqli_error($link) . "</div>";
+                        }
+                    } else {
+                        echo "<div class='error'>Error preparing default query: " . mysqli_error($link) . "</div>";
+                    }
+                }
+
                 ?>
             </div>
         </div>
@@ -144,6 +160,7 @@ if (isset($_POST['btnsearch'])) {
     </div>
 
     <script>
+        let errormsg = document.getElementById("php_error");
         document.getElementById("year").textContent = new Date().getFullYear();
 
         function confirmDelete(ticketnumber) {
@@ -178,6 +195,16 @@ if (isset($_POST['btnsearch'])) {
                 closeModal('detailsModal');
             }
         }
+
+
+        setTimeout(() => {
+            if (errormsg) {
+                errormsg.style.transition = "opacity 1s";
+                errormsg.style.opacity = "0";
+                setTimeout(() => errormsg.style.display = none, 1000);
+            }
+        }, 3000);
     </script>
 </body>
+
 </html>

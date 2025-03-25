@@ -3,46 +3,7 @@ require_once '../core/config.php';
 include '../core/session-checker.php';
 $updatemsg ='';
 $errormsg = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
-    //check existing user
-    $sql = "SELECT * FROM tblaccounts WHERE username = ?";
-    if ($stmt = mysqli_prepare($link, $sql)) {
-        $param_username = $_POST['txtusername'];
-        mysqli_stmt_bind_param($stmt, "s", $param_username);
-        if (mysqli_stmt_execute($stmt)) {
-            $result = mysqli_stmt_get_result($stmt);
-            if (mysqli_num_rows($result) == 0) {
 
-                $sql = "INSERT INTO tblaccounts (username, password, usertype, status, createdby, datecreated) VALUES (?, ?, ?, ?, ?,?)";
-                if ($stmt = mysqli_prepare($link, $sql)) {
-                    $username = $_POST['txtusername'];
-                    $password = $_POST['txtpassword'];
-                    $usertype = $_POST['cmbtype'];
-                    $createdby = $_SESSION['username'];
-                    $status = "ACTIVE";
-                    $datecreated = date("d/m/Y");
-
-                    mysqli_stmt_bind_param($stmt, "ssssss", $username, $password, $usertype, $status, $createdby, $datecreated);
-                    if (mysqli_stmt_execute($stmt)) {
-
-                        $updatemsg = urlencode("Account created successfully");
-                        header("Location: accounts-management.php?updatemsg=$updatemsg");
-                        exit();
-                    } else {
-
-                        $errormsg .=  "Error creating account";
-                        header("Location: accounts-management.php?errormsg=$errormsg");
-                        exit();
-                    }
-                }
-            } else {
-                $errormsg .=  "Username already exists";
-                header("Location: accounts-management.php?errormsg=$errormsg");
-                exit();
-            }
-        }
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
