@@ -1,7 +1,8 @@
 <?php
-require_once "config.php";
-include "session-checker.php";
-include "errors.php";
+
+require_once '../core/config.php';
+include '../core/session-checker.php';
+include "../core/errors.php";
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 
@@ -58,8 +59,8 @@ if (isset($_POST['btnsubmit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/modern-normalize.css">
-    <link rel="stylesheet" href="css/update-account.css">
+    <link rel="stylesheet" href="../../css/general/modern-normalize.css">
+    <link rel="stylesheet" href="../../css/accounts/update-account.css">
     <title>Update Account Page - AU Technical Support Management System</title>
 </head>
 

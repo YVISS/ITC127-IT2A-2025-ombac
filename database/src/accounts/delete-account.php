@@ -1,7 +1,8 @@
 <?php
-require_once 'config.php';
-include "session-checker.php";
-include "errors.php";
+
+require_once '../core/config.php';
+include '../core/session-checker.php';
+include "../core/errors.php";
 
 $updatemsg = '';
 $errormsg = '';

@@ -1,0 +1,162 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #000074;
+    color: #f0f8ff;
+    flex-direction: row;
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: inherit;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    gap: 50px;
+}
+
+.session {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    font-size: 1vw;
+    flex-direction: column;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+.form__btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3vw;
+    width: 100%;
+}
+
+.form input[type="submit"] {
+    padding: 10px;
+    width: auto;
+    height: 4vh;
+    background-color: hsl(240, 100%, 80%);
+    border-radius: 6px;
+    border: 1px solid hsl(240, 100%, 80%);
+    transition: 0.3s ease-in-out;
+}
+
+.form input[type="submit"]:hover {
+    transform: translateY(-3px);
+    background-color: hsl(240, 100%, 70%);
+    border: 1px solid hsl(240, 100%, 70%);
+}
+
+.form__btns button {
+    padding: 10px;
+    width: auto;
+    height: 4vh;
+    background-color: orange;
+    border-radius: 6px;
+    border: 1px solid orange;
+    transition: 0.3s ease-in-out;
+}
+
+.form__btns button:hover {
+    transform: translateY(-3px);
+    background-color: orangered;
+    border: 1px solid orangered;
+}
+
+.form__btns a {
+    color: black;
+}
+
+.form h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #333;
+}
+
+.form input[type="text"],
+.form input[type="password"],
+.form select {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form button[type="submit"],
+.form a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form a {
+    background-color: #6c757d;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input[type="password"] {
+    width: 100%;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 65%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.main-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    flex-direction: column;
+    width: 100%;
+}
+
+footer {
+    background-color: rgb(0, 0, 116);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    color: aliceblue;
+}

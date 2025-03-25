@@ -24,7 +24,9 @@ if (isset($_POST['btnlogin'])) {
                 $_SESSION['username'] = $account['username'];
                 $_SESSION['usertype'] = $account['usertype'];
                 //redirect to accounts page
-                header("location: equipment-management.php");
+
+                //validate usertype
+                header("location: index.php");
             } else {
                 $msg .= "Incorrect login details or account is inactive";
             }
@@ -41,8 +43,8 @@ if (isset($_POST['btnlogin'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css\modern-normalize.css">
-    <link rel="stylesheet" href="css\login.css">
+    <link rel="stylesheet" href="../../css/general/login.css">
+    <link rel="stylesheet" href="../../css/general/modern-normalize.css">
     <title>Login Page - AU TECHNICAL SUPPORT MANAGEMENT SYSTEM</title>
 </head>
 

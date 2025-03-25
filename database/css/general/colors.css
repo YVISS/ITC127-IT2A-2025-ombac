@@ -1,0 +1,33 @@
+:root{
+    /* CSS HEX */
+ --fuscous-gray: #54534c;
+ --muesli: #af7d5f;
+ --leather: #a3745b;
+ --driftwood: #b17c54;
+ --sandrift: #b3927f;
+ --toast: #9c7c65;
+ --muddy-waters: #bc8361;
+ --domino: #947c62;
+ --storm-dust: #6c6c69;
+ --sandal: #b49474;
+ --light-text: #FFFFFF;
+ --darker-gray: #583C2C;
+ 
+ 
+ 
+ 
+ 
+ /* SCSS RGB */
+ --fuscous-gray: rgba(84,83,76,1);
+ --muesli: rgba(175,125,95,1);
+ --leather: rgba(163,116,91,1);
+ --driftwood: rgba(177,124,84,1);
+ --sandrift: rgba(179,146,127,1);
+ --toast: rgba(156,124,101,1);
+ --muddy-waters: rgba(188,131,97,1);
+ --domino: rgba(148,124,98,1);
+ --storm-dust: rgba(108,108,105,1);
+ --sandal: rgba(180,148,116,1);
+ 
+ --blue: rgba(0, 0, 116, 0.596);
+}

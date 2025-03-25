@@ -1,6 +1,7 @@
 <?php
-require_once 'config.php';
-include 'session-checker.php';
+
+require_once '../core/config.php';
+include '../core/session-checker.php';
 
 $msg = '';
 
@@ -52,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnsave'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/modern-normalize.css">
-    <link rel="stylesheet" href="css/add-equipment.css">
+    <link rel="stylesheet" href="../../css/general/modern-normalize.css">
+    <link rel="stylesheet" href="../../css/equipment/add-equipment.css">
     <title>Add Equipment - AU TECHNICAL SUPPORT MANAGEMENT SYSTEM</title>
 </head>
 <body>

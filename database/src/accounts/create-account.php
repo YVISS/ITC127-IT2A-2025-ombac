@@ -1,6 +1,7 @@
 <?php
-require_once 'config.php';
-include 'session-checker.php';
+
+require_once '../core/config.php';
+include '../core/session-checker.php';
 
 $msg = '';
 
@@ -46,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/modern-normalize.css">
-    <link rel="stylesheet" href="css/create-account.css">
+    <link rel="stylesheet" href="../../css/general/modern-normalize.css">
+    <link rel="stylesheet" href="../../css/accounts/create-account.css">
     <title>Create Account - AU TECHNICAL SUPPORT MANAGEMENT SYSTEM</title>
 </head>
 <body>
@@ -96,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
                         <option value="">--Select Account Type--</option>
                         <option value="ADMINISTRATOR">Administrator</option>
                         <option value="TECHNICAL">Technical</option>
-                        <option value="STAFF">Staff</option>
+                        <option value="USER">User</option>
                     </select><br>
                     <button name="btncreate" type="submit">Create Account</button>
                     <a href="accounts-management.php">Cancel</a>
