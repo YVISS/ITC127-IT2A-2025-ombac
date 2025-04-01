@@ -2,6 +2,7 @@
 
 require_once '../core/config.php';
 include '../core/session-checker.php';
+include '../core/errors.php';
 
 $updatemsg = '';
 $errormsg = '';
@@ -52,7 +53,11 @@ $errormsg = '';
             <div class="form section">
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                     <div class="form__btns">
-                        <button type="button" onclick="window.location.href='create-ticket.php'">Create Ticket</button>
+                        <?php 
+                            if($_SESSION['usertype'] == 'ADMINISTRATOR'){
+                               echo "<button type='button' onclick=\"window.location.href='create-ticket.php'\">Create Ticket</button>";
+                            }
+                        ?>
                         <button><a href="../core/logout.php">Logout</a></button>
                         <input type="text" name="txtsearch" placeholder="Search...">
                         <input type="submit" value="Search" name="btnsearch">
@@ -69,16 +74,35 @@ $errormsg = '';
                         echo "<th>Ticket Number</th><th>Problem</th><th>Date Created</th><th>Status</th><th>Action</th>";
                         echo "</tr>";
                         while ($row = mysqli_fetch_array($result)) {
-                            echo "<tr class='row'>";
+                            echo "<tr>";
                             echo "<td>" . $row['ticketnumber'] . "</td>";
                             echo "<td>" . $row['problem'] . "</td>";
                             echo "<td>" . $row['datecreated'] . "</td>";
                             echo "<td>" . $row['status'] . "</td>";
-                            echo "<td>
-                                <a href='update-ticket.php?ticketnumber=" . $row['ticketnumber'] . "'>Update</a> |
-                                <a href='#' onclick='confirmDelete(\"" . $row['ticketnumber'] . "\")'>Delete</a> |
-                                <a href='#' onclick='viewDetails(" . json_encode($row) . ")'>Details</a>
-                            </td>";
+                            echo "<td>";
+
+                            if ($_SESSION['usertype'] == 'ADMINISTRATOR') {
+                                echo "<a href='#' onclick='confirmDelete(\"" . $row['ticketnumber'] . "\")'>Delete  </a>";
+                                if ($row['status'] == 'PENDING' || $row['status'] == 'ONGOING') {
+                                    echo "<a href='assign-ticket.php?ticketnumber=" . $row['ticketnumber'] . "'>| Assign</a>";
+                                }
+                                if ($row['status'] == 'FOR APPROVAL') {
+                                    echo "<a href='#' onclick='approveTicket(" . $row['ticketnumber'] . ")'>| Approve</a>";
+                                }
+                            } elseif ($_SESSION['usertype'] == 'TECHNICAL') {
+                                if ($row['status'] == 'ON-GOING') {
+                                    echo "<a href='#' onclick='completeTicket(" . $row['ticketnumber'] . ")'>| Complete</a>";
+                                }
+                                if ($row['status'] == 'ONGOING') {
+                                    echo "<a href='#' onclick='completeTicket(\"" . $row['ticketnumber'] . "\")'>| Complete</a>";
+                                }
+                            } else if($_SESSION['usertype'] == 'USER') {
+                                if ($row['status'] == 'CLOSED') {
+                                    echo "<a href='#' onclick='confirmDelete(" . $row['ticketnumber'] . ")'>| Delete</a>";
+                                }
+                            }
+
+                            echo "</td>";
                             echo "</tr>";
                         }
                         echo "</table>";
@@ -89,9 +113,22 @@ $errormsg = '';
                 // Check if the search button is clicked
                 if (isset($_POST['btnsearch'])) {
                     $sql = "SELECT * FROM tbltickets WHERE ticketnumber LIKE ? OR problem LIKE ? OR status LIKE ? ORDER BY datecreated DESC";
+
+                    // If the user is a technical user, restrict the query to tickets assigned to them
+                    if ($_SESSION['usertype'] == 'TECHNICAL') {
+                        $sql = "SELECT * FROM tbltickets WHERE (ticketnumber LIKE ? OR problem LIKE ? OR status LIKE ?) AND assignedto = ? ORDER BY datecreated DESC";
+                    }
+
                     if ($stmt = mysqli_prepare($link, $sql)) {
                         $searchvalue = "%" . $_POST['txtsearch'] . "%";
-                        mysqli_stmt_bind_param($stmt, "sss", $searchvalue, $searchvalue, $searchvalue);
+
+                        // Bind parameters based on usertype
+                        if ($_SESSION['usertype'] == 'TECHNICAL') {
+                            mysqli_stmt_bind_param($stmt, "ssss", $searchvalue, $searchvalue, $searchvalue, $_SESSION['username']);
+                        } else {
+                            mysqli_stmt_bind_param($stmt, "sss", $searchvalue, $searchvalue, $searchvalue);
+                        }
+
                         if (mysqli_stmt_execute($stmt)) {
                             $result = mysqli_stmt_get_result($stmt);
                             buildTable($result);
@@ -101,18 +138,42 @@ $errormsg = '';
                     } else {
                         echo "<div class='error'>Error preparing search query: " . mysqli_error($link) . "</div>";
                     }
-                } else {
-                    // Default query to display all tickets
-                    $sql = "SELECT * FROM tbltickets ORDER BY datecreated DESC";
-                    if ($stmt = mysqli_prepare($link, $sql)) {
-                        if (mysqli_stmt_execute($stmt)) {
-                            $result = mysqli_stmt_get_result($stmt);
-                            buildTable($result);
+                } else { //load current data
+                    if (isset($_GET['ticketnumber']) && !empty(trim($_GET['ticketnumber']))) {
+                        $sql = "SELECT * FROM tbltickets WHERE ticketnumber = ?";
+                        if ($stmt = mysqli_prepare($link, $sql)) {
+                            mysqli_stmt_bind_param($stmt, "s", $_GET['ticketnumber']);
+                            if (mysqli_stmt_execute($stmt)) {
+                                $result = mysqli_stmt_get_result($stmt);
+                                $ticket = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                            }
                         } else {
-                            echo "<div class='error'>Error executing default query: " . mysqli_error($link) . "</div>";
+                            echo "<font color = 'red'>ERROR: Loading Tickets</font>";
                         }
                     } else {
-                        echo "<div class='error'>Error preparing default query: " . mysqli_error($link) . "</div>";
+                        // Default query to display tickets
+                        $sql = "SELECT * FROM tbltickets ORDER BY datecreated DESC";
+
+                        // If the user is a technical user, restrict the query to tickets assigned to them
+                        if ($_SESSION['usertype'] == 'TECHNICAL') {
+                            $sql = "SELECT * FROM tbltickets WHERE assignedto = ? ORDER BY datecreated DESC";
+                        }
+
+                        if ($stmt = mysqli_prepare($link, $sql)) {
+                            // Bind parameters based on usertype
+                            if ($_SESSION['usertype'] == 'TECHNICAL') {
+                                mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
+                            }
+
+                            if (mysqli_stmt_execute($stmt)) {
+                                $result = mysqli_stmt_get_result($stmt);
+                                buildTable($result);
+                            } else {
+                                echo "<div class='error'>Error executing default query: " . mysqli_error($link) . "</div>";
+                            }
+                        } else {
+                            echo "<div class='error'>Error preparing default query: " . mysqli_error($link) . "</div>";
+                        }
                     }
                 }
 
@@ -140,6 +201,31 @@ $errormsg = '';
         </div>
     </div>
 
+    <!-- Approve Modal -->
+    <div id="approveModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('approveModal')">&times;</span>
+            <h2>Approve Ticket</h2>
+            <form action="approve-ticket.php" method="POST">
+                <input type="hidden" name="ticketnumber" id="approveTicketNumber">
+                <input type="submit" value="Approve">
+            </form>
+        </div>
+    </div>
+
+    <!-- Complete Ticket Modal -->
+    <div id="completeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('completeModal')">&times;</span>
+            <h2>Complete Ticket</h2>
+            <p>Are you sure you want to mark this ticket as completed?</p>
+            <form action="complete-ticket.php" method="POST">
+                <input type="hidden" name="ticketnumber" id="completeTicketNumber">
+                <input type="submit" value="Complete">
+            </form>
+        </div>
+    </div>
+
     <!-- Details Modal -->
     <div id="detailsModal" class="modal">
         <div class="modal-content">
@@ -163,9 +249,23 @@ $errormsg = '';
         let errormsg = document.getElementById("php_error");
         document.getElementById("year").textContent = new Date().getFullYear();
 
-        function confirmDelete(ticketnumber) {
-            document.getElementById('deleteTicketNumber').value = ticketnumber;
+        function assignTicket(ticketNumber) {
+            window.location.href = "assign-ticket.php?ticketnumber=" + ticketNumber;
+        }
+
+        function approveTicket(ticketNumber) {
+            document.getElementById('approveTicketNumber').value = ticketNumber;
+            document.getElementById('approveModal').style.display = 'block';
+        }
+
+        function confirmDelete(ticketNumber) {
+            document.getElementById('deleteTicketNumber').value = ticketNumber;
             document.getElementById('deleteModal').style.display = 'block';
+        }
+
+        function completeTicket(ticketNumber) {
+            // Redirect to a page or handle the completion logic
+            window.location.href = "complete-ticket.php?ticketnumber=" + ticketNumber;
         }
 
         function viewDetails(ticket) {
@@ -182,6 +282,11 @@ $errormsg = '';
             document.getElementById('detailsDateApproved').textContent = ticket.dateapproved || 'N/A';
             document.getElementById('detailsModal').style.display = 'block';
         }
+
+        function completeTicket(ticketNumber) {
+    document.getElementById('completeTicketNumber').value = ticketNumber;
+    document.getElementById('completeModal').style.display = 'block';
+}
 
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
