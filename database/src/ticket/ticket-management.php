@@ -23,6 +23,10 @@ $errormsg = '';
     <div class="wrapper">
         <header>
             <h1>AU TSMS</h1>
+            <a href="../core/index.php" class="home-link"><svg class='home' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-home">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12.707 2.293l9 9c.63 .63 .184 1.707 -.707 1.707h-1v6a3 3 0 0 1 -3 3h-1v-7a3 3 0 0 0 -2.824 -2.995l-.176 -.005h-2a3 3 0 0 0 -3 3v7h-1a3 3 0 0 1 -3 -3v-6h-1c-.89 0 -1.337 -1.077 -.707 -1.707l9 -9a1 1 0 0 1 1.414 0m.293 11.707a1 1 0 0 1 1 1v7h-4v-7a1 1 0 0 1 .883 -.993l.117 -.007z" />
+                </svg></a>
             <div class="session section">
                 <?php
                 if ($_SESSION['username']) {
@@ -53,10 +57,10 @@ $errormsg = '';
             <div class="form section">
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                     <div class="form__btns">
-                        <?php 
-                            if($_SESSION['usertype'] == 'ADMINISTRATOR'){
-                               echo "<button type='button' onclick=\"window.location.href='create-ticket.php'\">Create Ticket</button>";
-                            }
+                        <?php
+                        if ($_SESSION['usertype'] == 'USER') {
+                            echo "<button type='button' onclick=\"window.location.href='create-ticket.php'\">Create Ticket</button>";
+                        }
                         ?>
                         <button><a href="../core/logout.php">Logout</a></button>
                         <input type="text" name="txtsearch" placeholder="Search...">
@@ -79,26 +83,29 @@ $errormsg = '';
                             echo "<td>" . $row['problem'] . "</td>";
                             echo "<td>" . $row['datecreated'] . "</td>";
                             echo "<td>" . $row['status'] . "</td>";
-                            echo "<td>";
+                            echo "<td class='actions'>";
 
                             if ($_SESSION['usertype'] == 'ADMINISTRATOR') {
-                                echo "<a href='#' onclick='confirmDelete(\"" . $row['ticketnumber'] . "\")'>Delete  </a>";
+                                //default hrefs for usertypes
+                                echo "<a href='#' onclick='confirmDelete(\"" . $row['ticketnumber'] . "\")'><svg class='delete' xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"icon icon-tabler icons-tabler-outline icon-tabler-circle-minus\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0\" /><path d=\"M9 12l6 0\" /></svg></a>";
+                                echo "<a href='#' onclick='viewDetails(" . json_encode($row) . ")'><svg class='details' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-clipboard-text'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2' /><path d='M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z' /><path d='M9 12h6' /><path d='M9 16h6' /></svg></a>";
                                 if ($row['status'] == 'PENDING' || $row['status'] == 'ONGOING') {
-                                    echo "<a href='assign-ticket.php?ticketnumber=" . $row['ticketnumber'] . "'>| Assign</a>";
+                                    echo "<a  href='assign-ticket.php?ticketnumber=" . $row['ticketnumber'] . "'><svg class='assign' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-users-plus'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0' /><path d='M3 21v-2a4 4 0 0 1 4 -4h4c.96 0 1.84 .338 2.53 .901' /><path d='M16 3.13a4 4 0 0 1 0 7.75' /><path d='M16 19h6' /><path d='M19 16v6' /></svg></a>";
                                 }
                                 if ($row['status'] == 'FOR APPROVAL') {
-                                    echo "<a href='#' onclick='approveTicket(" . $row['ticketnumber'] . ")'>| Approve</a>";
+                                    echo "<a href='#' onclick='approveTicket(" . $row['ticketnumber'] . ")'><svg class='approve' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-circle-check'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0' /><path d='M9 12l2 2l4 -4' /></svg></a>";
                                 }
                             } elseif ($_SESSION['usertype'] == 'TECHNICAL') {
-                                if ($row['status'] == 'ON-GOING') {
-                                    echo "<a href='#' onclick='completeTicket(" . $row['ticketnumber'] . ")'>| Complete</a>";
-                                }
+
+                                echo "<a href='#' onclick='viewDetails(" . json_encode($row) . ")'><svg class='details' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-clipboard-text'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2' /><path d='M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z' /><path d='M9 12h6' /><path d='M9 16h6' /></svg></a>";
                                 if ($row['status'] == 'ONGOING') {
-                                    echo "<a href='#' onclick='completeTicket(\"" . $row['ticketnumber'] . "\")'>| Complete</a>";
+                                    echo "<a href='#' onclick='completeTicket(\"" . $row['ticketnumber'] . "\")'><svg class='complete' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='currentColor' class='icon icon-tabler icons-tabler-filled icon-tabler-star'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z' /></svg></a>";
                                 }
-                            } else if($_SESSION['usertype'] == 'USER') {
+                            } else if ($_SESSION['usertype'] == 'USER') {
+                                echo "<a href='update-ticket.php?ticketnumber=" . $row['ticketnumber'] . "'> <svg class='update' xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"icon icon-tabler icons-tabler-outline icon-tabler-pencil-check\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4\" /><path d=\"M13.5 6.5l4 4\" /><path d=\"M15 19l2 2l4 -4\" /></svg></a>";
+                                echo "<a  href='#' onclick='viewDetails(" . json_encode($row) . ")'> <svg class='details' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-clipboard-text'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2' /><path d='M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z' /><path d='M9 12h6' /><path d='M9 16h6' /></svg></a>";
                                 if ($row['status'] == 'CLOSED') {
-                                    echo "<a href='#' onclick='confirmDelete(" . $row['ticketnumber'] . ")'>| Delete</a>";
+                                    echo "<a href='#' onclick='confirmDelete(\"" . $row['ticketnumber'] . "\")'><svg class='delete' xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"icon icon-tabler icons-tabler-outline icon-tabler-circle-minus\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0\" /><path d=\"M9 12l6 0\" /></svg></a>";
                                 }
                             }
 
@@ -151,11 +158,11 @@ $errormsg = '';
                             echo "<font color = 'red'>ERROR: Loading Tickets</font>";
                         }
                     } else {
-                        // Default query to display tickets
-                        $sql = "SELECT * FROM tbltickets ORDER BY datecreated DESC";
-
                         // If the user is a technical user, restrict the query to tickets assigned to them
-                        if ($_SESSION['usertype'] == 'TECHNICAL') {
+                        if ($_SESSION['usertype'] == 'ADMINISTRATOR' || $_SESSION['usertype'] == 'USER') {
+                            $sql = "SELECT * FROM tbltickets ORDER BY datecreated DESC";
+                        }
+                        else{
                             $sql = "SELECT * FROM tbltickets WHERE assignedto = ? ORDER BY datecreated DESC";
                         }
 
@@ -208,7 +215,12 @@ $errormsg = '';
             <h2>Approve Ticket</h2>
             <form action="approve-ticket.php" method="POST">
                 <input type="hidden" name="ticketnumber" id="approveTicketNumber">
+                <div class="form__btns">
+
                 <input type="submit" value="Approve">
+                <button type="button" onclick="closeModal('approveModal')">Cancel</button>
+
+                </div>
             </form>
         </div>
     </div>
@@ -284,9 +296,9 @@ $errormsg = '';
         }
 
         function completeTicket(ticketNumber) {
-    document.getElementById('completeTicketNumber').value = ticketNumber;
-    document.getElementById('completeModal').style.display = 'block';
-}
+            document.getElementById('completeTicketNumber').value = ticketNumber;
+            document.getElementById('completeModal').style.display = 'block';
+        }
 
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';

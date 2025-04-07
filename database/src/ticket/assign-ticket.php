@@ -53,7 +53,7 @@ if (isset($_POST['btnsave'])) {
                 $time = date("h:i:sa");
                 $action = "Assigned";
                 $module = "Assign Ticket";
-                mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $_SESSION['username'], $ticketnumber);
+                mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $_SESSION['username'], $technician);
                 if (mysqli_stmt_execute($stmt)) {
                     $updatemsg = "Ticket Assigned to " . $technician;
                     header("location: ticket-management.php?updatemsg=" . urlencode($updatemsg));

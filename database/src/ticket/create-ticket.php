@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
     $ticketnumber = date("YmdHis"); // Auto-generate ticket number
     $problem = $_POST['cmbproblem'];
     $details = $_POST['txtdetails'];
-    $status = $_POST['cmbstatus'];
+    $status = 'PENDING';
     $createdby = $_SESSION['username'];
     $datecreated = date("d/m/Y:H:i:s");
 
@@ -75,14 +75,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
                         <option value="Software">Software</option>
                         <option value="Connection">Connection</option>
                     </select><br>
-                    <textarea name="txtdetails" placeholder="Enter problem details..."  required rows="15" cols="45"></textarea><br>
                     <select name="cmbstatus" required>
-                        <option value="">--Select Status--</option>
-                        <option value="PENDING">Pending</option>
-                        <option value="ONGOING">On-Going</option>
-                        <option value="FOR APPROVAL">For Approval</option>
-                        <option value="CLOSED">Closed</option>
+                        <option value="" disabled>--SELECT OPTION--</option>
+                        <option value="PENDING" selected disabled>Pending</option>
                     </select><br>
+                    <textarea name="txtdetails" placeholder="Enter problem details..."  required rows="15" cols="45"></textarea><br>
+                    
                     <button name="btncreate" type="submit">Create Ticket</button>
                     <a href="ticket-management.php">Cancel</a>
                 </form>

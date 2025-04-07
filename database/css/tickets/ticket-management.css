@@ -1,3 +1,5 @@
+@import url(../general/colors.css);
+
 *{
     padding: 0;
     margin: 0;
@@ -6,13 +8,22 @@
 
 header{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
     padding: 20px;
     background-color: #000074;
     color: #f0f8ff;
     flex-direction:row;
+}
+
+header .home{
+    width: auto;
+    height: 50px;
+    background-color: var(--leather);
+    color: rgba(245, 245, 245, 0.841);
+    padding: 10px;
+    border-radius: 6px;
 }
 
 header h1{
@@ -122,7 +133,7 @@ input[name="txtsearch"]{
 /*TABLE STYLES*/
 .table_component {
     overflow: auto;
-    width: 850px;
+    width: 90%; 
     height: auto;
 }
 
@@ -163,6 +174,42 @@ input[name="txtsearch"]{
     padding: 5px;
     text-align: center;
 }
+
+.table_component .actions svg{
+    width: auto;
+    height: 40px;
+    padding: 5px;
+    border-radius: 25%;
+    transition: 0.4s ease-in-out;
+}
+.table_component .actions{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.table_component .actions .update{
+    background-color: #9999FF;
+}
+
+.table_component .actions .delete{
+    background-color: red;
+}
+.table_component .actions .details{
+    background-color: #FF99CC;
+}
+.table_component .actions .approve{
+    background-color: rgb(72, 180, 72);
+}
+.table_component .actions .assign{
+    background-color: #99CCFF;
+}
+ .table_component .actions svg:hover{
+    transform:translateY(-5px) ;
+ }
+
+
+
 
 /* modal */
 * {

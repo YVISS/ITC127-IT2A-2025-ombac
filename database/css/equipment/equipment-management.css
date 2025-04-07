@@ -15,6 +15,15 @@ header{
     flex-direction:row;
 }
 
+header .home{
+    width: auto;
+    height: 50px;
+    background-color: var(--leather);
+    color: rgba(245, 245, 245, 0.841);
+    padding: 10px;
+    border-radius: 6px;
+}
+
 header h1{
     display: flex;
     align-items: center;
