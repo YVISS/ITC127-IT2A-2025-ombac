@@ -8,26 +8,16 @@ $msg = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnupdate'])) {
     $ticketnumber = $_GET['ticketnumber'];
     $problem = $_POST['cmbproblem'];
+    $status = $_POST['cmbstatus'];
     $details = $_POST['txtdetails'];
 
-    $sql = "UPDATE tbltickets SET problem = ?, details = ? WHERE ticketnumber = ?";
+    $sql = "UPDATE tbltickets SET problem = ?, details = ?, status=? WHERE ticketnumber = ?";
     if ($stmt = mysqli_prepare($link, $sql)) {
-        mysqli_stmt_bind_param($stmt, "sss", $problem, $details, $ticketnumber);
+        mysqli_stmt_bind_param($stmt, "ssss", $problem, $details,$status, $ticketnumber);
         if (mysqli_stmt_execute($stmt)) {
-            $sql = "INSERT INTO tbllogs (datelog, timelog, action, module, performedby, performedto) VALUES (?,?,?,?,?,?)";
-            if ($stmt = mysqli_prepare($link, $sql)) {
-                $date = date("d/m/Y");
-                $time = date("h:i:sa");
-                $action = "Update";
-                $module = "Ticket Management";
-                mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $_SESSION['username'], $ticketnumber);
-                if (mysqli_stmt_execute($stmt)) {
-                    $msg = "Ticket updated successfully";
-                header("Location: ticket-management.php?updatemsg=" . urlencode($msg));
-                exit();
-                }
-            }
-            
+            $msg = "Ticket updated successfully";
+            header("Location: ticket-management.php?updatemsg=" . urlencode($msg)); 
+            exit();
         } else {
             $msg = "Error updating ticket";
         }
@@ -71,6 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnupdate'])) {
                         <option value="Hardware">Hardware</option>
                         <option value="Software">Software</option>
                         <option value="Connection">Connection</option>
+                    </select><br>
+                    <select name="cmbstatus" required>
+                        <option value="">Current: <?php echo $ticket['status']; ?></option>
+                        <option value="PENDING">Pending</option>
+                        <option value="ONGOING">On-Going</option>
+                        <option value="FOR APPROVAL">For Approval</option>
+
+                        <option value="COMPLETED">Complete</option>
+                        <option value="CLOSED">Closed</option>
                     </select><br>
                     <textarea name="txtdetails" required><?php echo $ticket['details']; ?></textarea><br>
                     <button name="btnupdate" type="submit">Update Ticket</button>
