@@ -76,18 +76,38 @@ header h1{
     padding: 10px;
     width: auto;
     height: 4vh;
-    background-color: orange;
+    background-color: #66FF66;
     border-radius: 6px;
-    border: 1px solid orange;
+    border: 1px solid #66FF66;
     transition: 0.3s ease-in-out;
+}
+.form__btns .btnlogout{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: auto;
+    height: 4vh;
+    background-color: #FF6666;
+    border-radius: 6px;
+    border: 1px solid #FF6666;
+    transition: 0.3s ease-in-out;
+}
+.form__btns .btnlogout a{
+    color: whitesmoke;
+}
+.form__btns .btnlogout:hover{
+    transform: translateY(-3px);
+    background-color: #e05a5a;
+    border: 1px solid #e05a5a; 
 }
 
 .form__btns button:hover{
     transform: translateY(-3px);
-    background-color: orangered;
-    border: 1px solid orangered;
-    
+    background-color: #33ff33;
+    border: 1px solid #33ff33; 
 }
+
 
 .form__btns a{
     color: black;
@@ -190,6 +210,10 @@ body {
 
 /* Centered modal box */
 .modal-content {
+    display: flex;
+    align-items: flex-start ;
+    justify-content: center;
+    flex-direction: column;
     background-color: #fff;
     margin: 15% auto;
     padding: 20px;
@@ -197,13 +221,14 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
-    text-align: center;
+    gap: 5px;
 }
 
 .modal-content h2 {
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
+    text-align: center;
 }
 
 .modal-content input[type="text"],
@@ -239,11 +264,12 @@ body {
 }
 
 .modal-content .close {
-    position: absolute;
-    top: 10px;
+    position: relative;
+    top: 0px;
     right: 10px;
-    font-size: 24px;
+    font-size: 36px;
     cursor: pointer;
+    left: 95%;
 }
 
 .modal-content .close:hover {

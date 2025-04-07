@@ -9,6 +9,8 @@
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
 }
+
+
 header{
     display: flex;
     justify-content: center;
@@ -31,6 +33,7 @@ header{
     justify-content: center;
     width: 25vw;
     height: 400px;
+    background-color: white;
     box-shadow: 0px 0px 150px 19px rgba(235,127,235,0.71);
     border-radius: 16px;
     flex-direction: column;

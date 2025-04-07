@@ -53,7 +53,7 @@ $errormsg = '';
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                     <div class="form__btns">
                         <button type="button" onclick="window.location.href='create-ticket.php'">Create Ticket</button>
-                        <button><a href="../core/logout.php">Logout</a></button>
+                        <button class="btnlogout"><a href="../core/logout.php">Logout</a></button>
                         <input type="text" name="txtsearch" placeholder="Search...">
                         <input type="submit" value="Search" name="btnsearch">
                     </div>
@@ -145,7 +145,7 @@ $errormsg = '';
         <div class="modal-content">
             <span class="close" onclick="closeModal('detailsModal')">&times;</span>
             <h2>Ticket Details</h2>
-            <p><strong>Ticket Number:</strong> <span id="detailsTicketNumber"></span></p>
+            <p><strong>Ticket Number:</strong><span id="detailsTicketNumber"></span></p>
             <p><strong>Problem:</strong> <span id="detailsProblem"></span></p>
             <p><strong>Details:</strong> <span id="detailsDetails"></span></p>
             <p><strong>Status:</strong> <span id="detailsStatus"></span></p>

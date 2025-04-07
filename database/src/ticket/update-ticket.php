@@ -14,9 +14,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnupdate'])) {
     if ($stmt = mysqli_prepare($link, $sql)) {
         mysqli_stmt_bind_param($stmt, "sss", $problem, $details, $ticketnumber);
         if (mysqli_stmt_execute($stmt)) {
-            $msg = "Ticket updated successfully";
-            header("Location: ticket-management.php?updatemsg=" . urlencode($msg));
-            exit();
+            $sql = "INSERT INTO tbllogs (datelog, timelog, action, module, performedby, performedto) VALUES (?,?,?,?,?,?)";
+            if ($stmt = mysqli_prepare($link, $sql)) {
+                $date = date("d/m/Y");
+                $time = date("h:i:sa");
+                $action = "Update";
+                $module = "Ticket Management";
+                mysqli_stmt_bind_param($stmt, "ssssss", $date, $time, $action, $module, $_SESSION['username'], $ticketnumber);
+                if (mysqli_stmt_execute($stmt)) {
+                    $msg = "Ticket updated successfully";
+                header("Location: ticket-management.php?updatemsg=" . urlencode($msg));
+                exit();
+                }
+            }
+            
         } else {
             $msg = "Error updating ticket";
         }
