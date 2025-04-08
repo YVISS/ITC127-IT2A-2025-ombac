@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+body{
+    background-image: linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url('../../src/images/au_bg2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .wrapper{
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -17,8 +23,13 @@ header{
     align-items: center;
     width: 100%;
     padding: 20px;
-    background:#1919e6;
+    background:rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(10px);
     color: #f0f8ff;
+}
+header img{
+    width: auto;
+    height: 7vh;
 }
 .main-content{
     width: 100%;
@@ -33,11 +44,14 @@ header{
     justify-content: center;
     width: 25vw;
     height: 400px;
-    background-color: white;
-    box-shadow: 0px 0px 150px 19px rgba(235,127,235,0.71);
     border-radius: 16px;
     flex-direction: column;
     padding: 40px;
+
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
 }
 
 .main-content .card .card__title{
@@ -123,16 +137,19 @@ input[type="submit"]:hover{
     font-size: 18px;
 }
 
-.toggle-password svg{
-}
-
 footer{
-    background-color: rgb(0, 0, 116);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed;
+    background-color: #0F172A;
+    bottom: 0;
     width: 100%;
     height: 50px;
     color: aliceblue;
+}
+footer p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 50px; /* Centers the text vertically */
 }
 

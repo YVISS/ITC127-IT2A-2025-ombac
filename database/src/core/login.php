@@ -51,7 +51,8 @@ if (isset($_POST['btnlogin'])) {
 <body>
     <div class="wrapper">
         <header>
-            <h1>AU Techincal Support Management System</h1>
+        <img src="../../src/images/au_logo.png" alt="Arellano University Logo">
+            <h1>AU Technical Support Management System</h1>
         </header>
         <div class="main-content">
             

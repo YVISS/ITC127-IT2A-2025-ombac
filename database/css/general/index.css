@@ -7,7 +7,7 @@
 }
 
 body{
-    width: 100%;
+    width: auto;
     height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
@@ -17,200 +17,7 @@ body{
     display: flex;
 }
 
-.wrapper_header{
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    color: #f0f8ff;
-    flex-direction:row;
-}
 
-/* wrapper */
-.wrapper{
-    width: 100%; /* Adjust width to account for sidebar */
-    margin-left: 250px; /* Align next to sidebar */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.wrapper-container{
-    display: grid;
-    grid-template-rows: 100px 1fr auto;
-    margin: 0 30px 0 30px;
-}
-
-/* sidebar */
-
-.sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    background-color: var(--light-text);
-    padding: 10px 14px;
-    transition: 0.5s ease-in-out;
-}
-
-.sidebar .image-text img{
-    width: 100px;
-    height: a   uto;
-}
-
-.sidebar header .image-text{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.sidebar header{
-    position: relative;
-}
-
-.sidebar .text{
-    font-size: 16px;
-    font-weight: 500;
-    transition: 0.4s ease-in-out;
-}
-
-.sidebar .image{
-    min-width: 60px;
-    display: flex;
-    align-items: center;
-}
-
-.sidebar_header .image-text .header-text{
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar .sidebar_header .toggle{
-    position: absolute;
-    top: 20px;
-    right: 0.92vw;
-    transform: translateY(-50%);
-    height: auto;
-    width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    font-size: 40px;
-    color: rgba(0, 0, 0, 1);
-    transition: 0.4s ease-in-out;
-}
-.sidebar .sidebar_header .toggle:hover{
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.10);
-}
-
-.sidebar .sidebar_header .toggle svg {
-    width: 40px; /* Adjust the width as needed */
-    height: 40px; /* Adjust the height as needed */
-}
-
-.sidebar li{
-    margin-top: 10px;
-    height: 50px;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.sidebar .logout{
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-
-.sidebar .menu li a{
-    width: 100%;
-    text-decoration: none;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-radius: 6px;
-    transition: 0.4s ease-in-out;
-}
-
-.sidebar .logout li a{
-    width: 100%;
-    text-decoration: none;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: 0.4s ease-in-out;
-}
-
-.sidebar li .icon{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 60px;
-    font-size: 40px;
-}
-
-.sidebar li  a:hover{
-    background: var(--blue);
-}
-
-.sidebar li .icon,
-.sidebar li .text{
-    transition: 0.6s ease-in-out;
-    color: var(--darker-gray);
-}
-
-.sidebar li  a:hover .icon,
-.sidebar li  a:hover .text{
-    color: var(--light-text);
-}
-
-
-.sidebar .logout li  a:hover .icon,
-.sidebar .logout li a:hover .text{
-    color: var(--light-text);
-}
-
-.sidebar .logout li a:hover{
-    background: red;
-}
-
-.sidebar .menu-bar{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: calc(100% - 50vh);
-}
-
-.sidebar.close{
-    width: 6vw;
-}
-
-.sidebar.close .text{
-    display: none;
-}
-
-.sidebar.close .image-text img{
-    width: 70px;
-}
-
-.session{
-    width: 100%;
-    display: flex;
-    align-items: flex-end; /* Align text to the left */
-    justify-content: center; /* Center vertically */
-    padding: 20px;
-    font-size: 1vw;
-    flex-direction: column;
-}
 .main-content{
     display: flex;
     justify-content: flex-start; /* Stack elements in a column */
@@ -221,11 +28,12 @@ body{
 }
 
 footer{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     width: 100%;
     height: 50px;
     color: aliceblue;

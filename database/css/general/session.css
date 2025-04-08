@@ -1,0 +1,10 @@
+
+.session{
+    width: 100%;
+    display: flex;
+    align-items: start; /* Align text to the left */
+    justify-content: center; /* Center vertically */
+    padding: 20px;
+    font-size: 1.5em;
+    flex-direction: column;
+}

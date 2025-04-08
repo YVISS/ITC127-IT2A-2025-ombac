@@ -1,0 +1,8 @@
+sidebar
+-add home li for every user redirect to index
+
+index page
+-dashboard
+--number of accounts
+--tickets
+--more
