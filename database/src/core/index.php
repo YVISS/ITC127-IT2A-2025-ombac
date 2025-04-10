@@ -19,28 +19,28 @@ include './session-checker.php';
 
 <body>
     <nav class="sidebar close">
-    <header class="sidebar_header">
-        <i class="toggle">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right-pipe">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <header class="sidebar_header">
+            <i class="toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right-pipe">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M6 6l6 6l-6 6" />
                     <path d="M17 5v13" />
                 </svg>
-        </i>
-        <li class="welcome">
-        <div class="session section">
+            </i>
+            <li class="welcome">
+                <div class="session section">
                     <?php
                     //check if session is recorded
                     if ($_SESSION['username']) {
-                        echo "<div class='sessionuser''>Welcome,  ". $_SESSION['username'] . "</div>";
-                        echo" <div class = 'sessiontype' style='font-size: 12px;'>Usertype: ". $_SESSION['usertype'] . "</div>";
+                        echo "<div class='sessionuser''>Welcome,  " . $_SESSION['username'] . "</div>";
+                        echo " <div class = 'sessiontype' style='font-size: 12px;'>Usertype: " . $_SESSION['usertype'] . "</div>";
                     } else {
                         header("location: login.php");
                     }
                     ?>
                 </div>
-        </li>
-    </header>
+            </li>
+        </header>
         <div class="menu-bar">
             <div class="menu">
                 <ul class="menu-links">
@@ -152,16 +152,16 @@ include './session-checker.php';
         <div class="wrapper-container">
             <header class="wrapper_header">
                 <div class="logo">
-                    <img src="../../src/images/au_logo.png" alt="Arellano University Logo">
                 </div>
                 <div class="page-title">
+                <img src="../../src/images/au_logo.png" alt="Arellano University Logo">
                     <h1>AU Technical Support Management System</h1>
                 </div>
-                
-                
+
+
             </header>
             <div class="main-content">
-                
+
 
             </div>
             <footer>

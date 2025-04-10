@@ -1,14 +1,16 @@
 .wrapper_header{
-    display: grid;
-    grid-template-columns: auto 1fr 1fr;
+    display: flex;
+    margin-bottom: 4vh;
     padding: 20px;
     color: #f0f8ff;
     flex-direction:row;
-    gap: 20px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 
-.wrapper_header .logo img{
+.wrapper_header .page-title img{
     width: auto;
     height: 10vh;
 }
@@ -20,6 +22,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
 
 }
 
@@ -35,7 +38,9 @@
 
 
 .wrapper-container{
-    display: grid;
-    grid-template-rows: 100px 1fr auto;
-    margin: 0 30px 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
 }

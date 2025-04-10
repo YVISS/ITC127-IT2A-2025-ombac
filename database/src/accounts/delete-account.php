@@ -6,7 +6,7 @@ include "../core/errors.php";
 
 $updatemsg = '';
 $errormsg = '';
-if (isset($_POST['btnsubmit'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnsubmit'])) {
     $sql = "DELETE FROM tblaccounts WHERE username =?";
     if ($stmt = mysqli_prepare($link, $sql)) {
 
@@ -38,56 +38,3 @@ if (isset($_POST['btnsubmit'])) {
 }
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/modern-normalize.css">
-    <link rel="stylesheet" href="css/delete-account.css">
-    <title>Delete Account Page - AU Technical Support Management System</title>
-</head>
-
-<body>
-    <div class="wrapper">
-        <header>
-            <h1>AU TSMS</h1>
-            <div class="session section">
-                <?php
-                //check if session is recorded
-                if ($_SESSION['username']) {
-                    echo $_SESSION['username'] . " | ";
-                    echo $_SESSION['usertype'];
-                } else {
-                    header("location: login.php");
-                }
-                ?>
-            </div>
-        </header>
-        <div class="main-content">
-            <div class="page-title">
-                <h1>Delete Account</h1><br>
-                <div class="form">
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                        <input type="hidden" name="txtusername" value="<?php echo trim($_GET['username']); ?>" />
-                        <p>Are you sure you want to delete this account?</p>
-                        <div class="form__btns">
-                            <input type="submit" value="Yes" name="btnsubmit">
-                            <a href="accounts-management.php">Cancel</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <footer>
-            <p>&copy; <span id="year"></span> AU Technical Support Management System. All Rights Reserved.</p>
-        </footer>
-    </div>
-    <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
-</body>
-
-</html>
