@@ -1,71 +1,48 @@
-@import url(../general/colors.css);
+@import url('colors.css');
 
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-
-header{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-    background-color: #000074;
-    color: #f0f8ff;
-    flex-direction:row;
-}
-
-header .home{
+/* Body */
+body{
     width: auto;
-    height: 50px;
-    background-color: var(--leather);
-    color: rgba(245, 245, 245, 0.841);
-    padding: 10px;
-    border-radius: 6px;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-image:linear-gradient(rgba(0,0,0,0.60), rgba(0,0,0,0.60)), url('../../src/images/au_bg.jpg');
+    display: flex;
 }
 
-header h1{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: inherit;
-}
-
-.wrapper{
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
-    gap: 50px;
-}
-.session{
-    width: 100%;
-    display: flex;
-    align-items: flex-end; /* Align text to the left */
-    justify-content: center; /* Center vertically */
-    padding: 20px;
-    font-size: 1vw;
-    flex-direction: column;
-}
+/* Form */
 .form{
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 20px;
     padding: 20px;
-}
-
-.form__btns{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3vw;
     width: 100%;
 }
 
-.form input[type="submit"]{
+.form .search{
+    display: flex;
+    align-items:end;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+}
+
+
+.form .search button[type="submit"]{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 10px;
     width: auto;
     height: 4vh;
@@ -75,85 +52,92 @@ header h1{
     transition: 0.3s ease-in-out;
 }
 
-.form input[type="submit"]:hover{
+/*search bar*/
+input[name="txtsearch"]{
+    width: 30vw; /* Makes input fields stretch */
+    padding: 8px;
+    border: none;
+    margin-top: 15px;
+    color: whitesmoke;
+    background-color: transparent;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.form input[name="txtsearch"]:focus{
+    outline: none;
+    border-bottom: 1px solid hsl(240, 100%, 80%);
+}
+
+.form .search button[type="submit"]:hover{
     transform: translateY(-3px);
     background-color: hsl(240, 100%, 70%);
     border: 1px solid hsl(240, 100%, 70%);
 }
-.form__btns button{
+
+/* createaccount btn */
+.form .search button[type="button"]{
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
     width: auto;
     height: 4vh;
-    background-color: #66FF66;
+    background-color: orange;
     border-radius: 6px;
-    border: 1px solid #66FF66;
+    border: 1px solid orange;
     transition: 0.3s ease-in-out;
 }
-.form__btns .btnlogout{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    width: auto;
-    height: 4vh;
-    background-color: #FF6666;
-    border-radius: 6px;
-    border: 1px solid #FF6666;
-    transition: 0.3s ease-in-out;
-}
-.form__btns .btnlogout a{
-    color: whitesmoke;
-}
-.form__btns .btnlogout:hover{
-    transform: translateY(-3px);
-    background-color: #e05a5a;
-    border: 1px solid #e05a5a; 
-}
 
-.form__btns button:hover{
+.form .search button:hover{
     transform: translateY(-3px);
-    background-color: #33ff33;
-    border: 1px solid #33ff33; 
+    background-color: orangered;
+    border: 1px solid orangered;
+    
 }
-
 
 .form__btns a{
     color: black;
 }
+
+/* Main-content */
+
 .main-content{
     display: flex;
-    justify-content: flex-start; /* Stack elements in a column */
+    justify-content: center; /* Stack elements in a column */
     align-items: center; /* Center content horizontally */
     gap: 20px; /* Add spacing between sections */
     flex-direction: column;
-    width: 100%;
+    width: calc(100% - 300px);
+    padding: 50px;
 }
-footer{
-    background-color: rgb(0, 0, 116);
+
+.card{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 50px;
-    color: aliceblue;
+    height: auto;
+    border-radius: 16px;
+    flex-direction: column;
+    padding: 40px;
+
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.card h1{
+    color: black;
+    font-weight: 500;
 }
 
-/*search bar*/
-input[name="txtsearch"]{
-    width: 15vw; /* Makes input fields stretch */
-    padding:8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-top: 15px;
+.card p{
+    color: whitesmoke;
 }
 
 /*TABLE STYLES*/
 .table_component {
     overflow: auto;
-    width: 90%; 
+    width: 850px;
     height: auto;
 }
 
@@ -165,6 +149,7 @@ input[name="txtsearch"]{
     border-collapse: collapse;
     border-spacing: 1px;
     text-align: left;
+    
 }
 
 .table_component caption {
@@ -176,11 +161,12 @@ input[name="txtsearch"]{
 }
 .table_component .headers{
     height: 70px;
+    
 }
 
 .table_component th {
-    border: 1px solid #dededf;
-    background-color: #eceff1;
+    border: 1px solid rgb(104, 104, 224);
+    background-color: rgb(117, 117, 255);
     color: #000000;
     padding: 5px;
     text-align: center;
@@ -209,39 +195,17 @@ input[name="txtsearch"]{
 }
 
 .table_component .actions .update{
-    background-color: #9999FF;
+    background-color: #00FFFF;
 }
 
 .table_component .actions .delete{
     background-color: red;
 }
-.table_component .actions .details{
-    background-color: #FF99CC;
-}
-.table_component .actions .approve{
-    background-color: rgb(72, 180, 72);
-}
-.table_component .actions .assign{
-    background-color: #99CCFF;
-}
- .table_component .actions svg:hover{
+
+.table_component .actions svg:hover{
     transform:translateY(-5px) ;
  }
-
-
-
-
 /* modal */
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-}
 
 .modal {
     display: none;
@@ -257,10 +221,6 @@ body {
 
 /* Centered modal box */
 .modal-content {
-    display: flex;
-    align-items: flex-start ;
-    justify-content: center;
-    flex-direction: column;
     background-color: #fff;
     margin: 15% auto;
     padding: 20px;
@@ -268,14 +228,13 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
-    gap: 5px;
+    text-align: center;
 }
 
 .modal-content h2 {
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
-    text-align: center;
 }
 
 .modal-content input[type="text"],
@@ -300,6 +259,25 @@ body {
     transition: 0.3s ease-in-out;
 }
 
+.modal-content button[type="button"]{
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: red;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+}
+.modal-content .form__btns{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    margin-top: 40px;
+}
 .modal-content input[type="submit"]:hover{
     background-color: hsl(240, 100%, 70%);
 }
@@ -311,12 +289,11 @@ body {
 }
 
 .modal-content .close {
-    position: relative;
-    top: 0px;
+    position: absolute;
+    top: 10px;
     right: 10px;
-    font-size: 36px;
+    font-size: 24px;
     cursor: pointer;
-    left: 95%;
 }
 
 .modal-content .close:hover {
@@ -335,4 +312,18 @@ body {
     justify-content: center;
     font-size: 20px;
     gap: 10px;
+}
+
+footer{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    color: aliceblue;
+}
+
+footer p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

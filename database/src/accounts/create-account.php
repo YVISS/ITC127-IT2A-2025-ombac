@@ -110,7 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
                                 </select>
                             </div>
                             <div class="form__btns">
-
                                 <button name="btncreate" type="submit">Create Account</button>
                                 <a href="accounts-management.php">Cancel</a>
                             </div>

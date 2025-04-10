@@ -48,6 +48,11 @@ include './session-checker.php';
                     switch ($_SESSION['usertype']) {
                         case 'ADMINISTRATOR':
                             echo "<li class='nav-link'>";
+                            echo "<a href='../core/index.php'>
+                            <svg  xmlns=\"http://www.w3.org/2000/svg\"  width=\"24\"  height=\"24\"  viewBox=\"0 0 24 24\"  fill=\"none\"  stroke=\"currentColor\"  stroke-width=\"2\"  stroke-linecap=\"round\"  stroke-linejoin=\"round\"  class=\"icon icon-tabler icons-tabler-outline icon-tabler-home\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M5 12l-2 0l9 -9l9 9l-2 0\" /><path d=\"M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7\" /><path d=\"M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6\" /></svg>
+                            <span class='text nav-text'>Home</span></a>";
+                            echo "</li>";
+                            echo "<li class='nav-link'>";
                             echo "<a href='../accounts/accounts-management.php'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-users'>
                                 <path stroke='none' d='M0 0h24v24H0z' fill='none' />
@@ -84,6 +89,11 @@ include './session-checker.php';
                             break;
                         case 'TECHNICAL':
                             echo "<li class='nav-link'>";
+                            echo "<a href='../core/index.php'>
+                            <svg  xmlns=\"http://www.w3.org/2000/svg\"  width=\"24\"  height=\"24\"  viewBox=\"0 0 24 24\"  fill=\"none\"  stroke=\"currentColor\"  stroke-width=\"2\"  stroke-linecap=\"round\"  stroke-linejoin=\"round\"  class=\"icon icon-tabler icons-tabler-outline icon-tabler-home\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M5 12l-2 0l9 -9l9 9l-2 0\" /><path d=\"M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7\" /><path d=\"M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6\" /></svg>
+                            <span class='text nav-text'>Home</span></a>";
+                            echo "</li>";
+                            echo "<li class='nav-link'>";
                             echo "<a href='../equipment/equipment-management.php'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-package'>
                                 <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
@@ -109,6 +119,11 @@ include './session-checker.php';
                             break;
                         case 'USER':
                             // For students and staff, no visible pages
+                            echo "<li class='nav-link'>";
+                            echo "<a href='../core/index.php'>
+                            <svg  xmlns=\"http://www.w3.org/2000/svg\"  width=\"24\"  height=\"24\"  viewBox=\"0 0 24 24\"  fill=\"none\"  stroke=\"currentColor\"  stroke-width=\"2\"  stroke-linecap=\"round\"  stroke-linejoin=\"round\"  class=\"icon icon-tabler icons-tabler-outline icon-tabler-home\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M5 12l-2 0l9 -9l9 9l-2 0\" /><path d=\"M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7\" /><path d=\"M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6\" /></svg>
+                            <span class='text nav-text'>Home</span></a>";
+                            echo "</li>";
                             echo "<li class='nav-link'>";
                             echo "<a href='../ticket/ticket-management.php'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-ticket'>

@@ -51,6 +51,11 @@ $errormsg = '';
                     switch ($_SESSION['usertype']) {
                         case 'ADMINISTRATOR':
                             echo "<li class='nav-link'>";
+                            echo "<a href='../core/index.php'>
+                            <svg  xmlns=\"http://www.w3.org/2000/svg\"  width=\"24\"  height=\"24\"  viewBox=\"0 0 24 24\"  fill=\"none\"  stroke=\"currentColor\"  stroke-width=\"2\"  stroke-linecap=\"round\"  stroke-linejoin=\"round\"  class=\"icon icon-tabler icons-tabler-outline icon-tabler-home\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M5 12l-2 0l9 -9l9 9l-2 0\" /><path d=\"M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7\" /><path d=\"M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6\" /></svg>
+                            <span class='text nav-text'>Home</span></a>";
+                            echo "</li>";
+                            echo "<li class='nav-link'>";
                             echo "<a href='../accounts/accounts-management.php'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-users'>
                                 <path stroke='none' d='M0 0h24v24H0z' fill='none' />
@@ -87,6 +92,11 @@ $errormsg = '';
                             break;
                         case 'TECHNICAL':
                             echo "<li class='nav-link'>";
+                            echo "<a href='../core/index.php'>
+                            <svg  xmlns=\"http://www.w3.org/2000/svg\"  width=\"24\"  height=\"24\"  viewBox=\"0 0 24 24\"  fill=\"none\"  stroke=\"currentColor\"  stroke-width=\"2\"  stroke-linecap=\"round\"  stroke-linejoin=\"round\"  class=\"icon icon-tabler icons-tabler-outline icon-tabler-home\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M5 12l-2 0l9 -9l9 9l-2 0\" /><path d=\"M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7\" /><path d=\"M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6\" /></svg>
+                            <span class='text nav-text'>Home</span></a>";
+                            echo "</li>";
+                            echo "<li class='nav-link'>";
                             echo "<a href='../equipment/equipment-management.php'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-package'>
                                 <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
@@ -112,6 +122,11 @@ $errormsg = '';
                             break;
                         case 'USER':
                             // For students and staff, no visible pages
+                            echo "<li class='nav-link'>";
+                            echo "<a href='../core/index.php'>
+                            <svg  xmlns=\"http://www.w3.org/2000/svg\"  width=\"24\"  height=\"24\"  viewBox=\"0 0 24 24\"  fill=\"none\"  stroke=\"currentColor\"  stroke-width=\"2\"  stroke-linecap=\"round\"  stroke-linejoin=\"round\"  class=\"icon icon-tabler icons-tabler-outline icon-tabler-home\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M5 12l-2 0l9 -9l9 9l-2 0\" /><path d=\"M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7\" /><path d=\"M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6\" /></svg>
+                            <span class='text nav-text'>Home</span></a>";
+                            echo "</li>";
                             echo "<li class='nav-link'>";
                             echo "<a href='../ticket/ticket-management.php'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-ticket'>
@@ -170,10 +185,10 @@ $errormsg = '';
                         <?php
                         if (isset($_GET['updatemsg'])) {
                             // Display the update status message
-                            echo "<div class='msg' style=' color: green'> <svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-circle-check-filled' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z' stroke-width='0' fill='currentColor' /></svg>" . htmlspecialchars($_GET['updatemsg']) . "</div>";
+                            echo "<div class='msg' style=' color: lightgreen'> <svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-circle-check-filled' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z' stroke-width='0' fill='currentColor' /></svg>" . htmlspecialchars($_GET['updatemsg']) . "</div>";
                         }
                         if (isset($_GET['errormsg'])) {
-                            echo '<div class="msg" style=" color: red"> <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-xbox-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10 -10 10s-10 -4.477 -10 -10s4.477 -10 10 -10m3.6 5.2a1 1 0 0 0 -1.4 .2l-2.2 2.933l-2.2 -2.933a1 1 0 1 0 -1.6 1.2l2.55 3.4l-2.55 3.4a1 1 0 1 0 1.6 1.2l2.2 -2.933l2.2 2.933a1 1 0 0 0 1.6 -1.2l-2.55 -3.4l2.55 -3.4a1 1 0 0 0 -.2 -1.4" /></svg>' . htmlspecialchars($_GET['errormsg']) . "</div>";
+                            echo '<div class="msg" style=" color: brightred"> <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-xbox-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10 -10 10s-10 -4.477 -10 -10s4.477 -10 10 -10m3.6 5.2a1 1 0 0 0 -1.4 .2l-2.2 2.933l-2.2 -2.933a1 1 0 1 0 -1.6 1.2l2.55 3.4l-2.55 3.4a1 1 0 1 0 1.6 1.2l2.2 -2.933l2.2 2.933a1 1 0 0 0 1.6 -1.2l-2.55 -3.4l2.55 -3.4a1 1 0 0 0 -.2 -1.4" /></svg>' . htmlspecialchars($_GET['errormsg']) . "</div>";
                         }
                         ?>
                     </div>
@@ -212,7 +227,11 @@ $errormsg = '';
                                     echo "<td>" . $row['status'] . "</td>";
                                     echo "<td>" . $row['createdby'] . "</td>";
                                     echo "<td>" . $row['datecreated'] . "</td>";
-                                    echo "<td><a href='update-account.php?username=" . $row['username'] . "'>Update</a> | <a href='#' onclick='confirmDelete(\"" . $row['username'] . "\")'>Delete</a></td>";
+                                    echo "<td class='actions'>";
+                                    echo "<a href='update-account.php?username=" . $row['username'] . "'><svg class='update' xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"icon icon-tabler icons-tabler-outline icon-tabler-pencil-check\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4\" /><path d=\"M13.5 6.5l4 4\" /><path d=\"M15 19l2 2l4 -4\" /></svg></a>";
+                                    
+                                    echo "<a href='#' onclick='confirmDelete(\"" . $row['username'] . "\")'><svg class='delete' xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"icon icon-tabler icons-tabler-outline icon-tabler-circle-minus\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0\" /><path d=\"M9 12l6 0\" /></svg></a>";
+                                    echo "</td>";
                                     echo "</tr>";
                                 }
                                 echo "</table>";
@@ -255,8 +274,8 @@ $errormsg = '';
                     <span class="close" onclick="closeModal('deleteModal')">&times;</span>
                     <h2>Delete Account</h2>
                     <p>Are you sure you want to delete this account?</p>
-                    <form id="deleteForm" method="POST">
-                        <input type="hidden" name="username" id="deleteUsername">
+                    <form id="deleteForm" action="delete-account.php" method="POST">
+                        <input type="hidden" name="txtusername" id="deleteUsername">
                         <div class="form__btns">
                             <input type="submit" value="Yes" name="btnsubmit">
                             <button type="button" onclick="closeModal('deleteModal')">Cancel</button>
@@ -274,12 +293,19 @@ $errormsg = '';
     </div>
 </body>
 <script>
+      let errormsg = document.getElementById("php_error");
     document.getElementById("year").textContent = new Date().getFullYear();
     const body = document.querySelector("body"),
         sidebar = body.querySelector(".sidebar"),
         toggle = sidebar.querySelector(".toggle");
     
-        
+        setTimeout(() => {
+        if (errormsg) {
+            errormsg.style.transition = "opacity 1s";
+            errormsg.style.opacity = "0";
+            setTimeout(() => errormsg.style.display = none, 1000);
+        }
+    }, 3000);
 
     toggle.addEventListener("click", () => {
         // Toggle the 'close' class on the sidebar

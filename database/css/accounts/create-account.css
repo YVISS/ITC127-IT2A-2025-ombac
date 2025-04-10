@@ -23,10 +23,10 @@ body{
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
     padding: 20px;
     width: 40vw;
 }
+
 
 .form__username{
     display: flex;
@@ -35,6 +35,8 @@ body{
     flex-direction: column;
 }
 
+
+
 .form input[type="text"],input[type="password"],select{
     width: calc(40vw - 20px); /* Makes input fields stretch */
     padding: 8px;
@@ -42,9 +44,13 @@ body{
     border-bottom: 1px solid #ccc;
     background-color: transparent;
     color: black;
-    font-size: 16px;
-
+    font-size: 24px;
     color: whitesmoke;
+}
+
+.form select{
+    color: black;
+    font-size: 24px;
 }
 
 .form .toggle-password{
@@ -67,8 +73,9 @@ body{
 }
 
 .form h2{
-    color: black;
-    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: #cccc;
+    font-weight: 700;
 }
 .form__password{
     display: flex;
@@ -194,7 +201,7 @@ body{
 }
 
 footer{
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     height: 50px;
