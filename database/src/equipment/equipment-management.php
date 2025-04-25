@@ -68,13 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
 </head>
 
 <body>
-    <nav class="sidebar close">
+<nav class="sidebar">
         <header class="sidebar_header">
             <i class="toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right-pipe">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M6 6l6 6l-6 6" />
-                    <path d="M17 5v13" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left-pipe">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M7 6v12" />
+                    <path d="M18 6l-6 6l6 6" />
                 </svg>
             </i>
             <li class="welcome">
@@ -175,6 +175,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
                             <span class='text nav-text'>Home</span></a>";
                             echo "</li>";
                             echo "<li class='nav-link'>";
+                            echo "<a href='../equipment/equipment-management.php'>
+                            <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-package'>
+                                <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
+                                <path d='M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5' />
+                                <path d='M12 12l8 -4.5' />
+                                <path d='M12 12l0 9' />
+                                <path d='M12 12l-8 -4.5' />
+                                <path d='M16 5.25l-8 4.5' />
+                            </svg>
+                            <span class='text nav-text'>Equiments</span></a>";
+                            echo "</li>";
+                            echo "<li class='nav-link'>";
                             echo "<a href='../ticket/ticket-management.php'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-ticket'>
                                 <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
@@ -266,8 +278,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
                             if (mysqli_num_rows($result) > 0) {
                                 echo "<table>";
                                 echo "<tr class='headers'>";
-                                echo "<th>Asset Number</th><th>Serial Number</th><th>Equipment Type</th><th>Branch</th><th>Status</th><th>Created By</th><th>Action</th>";
-                                echo "</tr>";
+                                echo "<th>Asset Number</th><th>Serial Number</th><th>Equipment Type</th><th>Branch</th><th>Status</th><th>Created By</th>";
+                                if($_SESSION['usertype'] == "ADMINISTRATOR" || $_SESSION['usertype'] == "TECHNICAL"){
+                                    echo "<th>Action</th>";
+                                }
                                 while ($row = mysqli_fetch_array($result)) {
                                     echo "<tr class='row'>";
                                     echo "<td>" . $row['assetnumber'] . "</td>";
@@ -276,11 +290,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
                                     echo "<td>" . $row['branch'] . "</td>";
                                     echo "<td>" . $row['status'] . "</td>";
                                     echo "<td>" . $row['createdby'] . "</td>";
-                                   echo "<td class='actions'>";
-                                    echo "<a href='update-equipment.php?assetnumber=" . $row['assetnumber'] . "'><svg class='update' xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"icon icon-tabler icons-tabler-outline icon-tabler-pencil-check\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4\" /><path d=\"M13.5 6.5l4 4\" /><path d=\"M15 19l2 2l4 -4\" /></svg></a>";
-                                    
-                                    echo "<a href='#' onclick='confirmDelete(\"" . $row['assetnumber'] . "\")'><svg class='delete' xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"icon icon-tabler icons-tabler-outline icon-tabler-circle-minus\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0\" /><path d=\"M9 12l6 0\" /></svg></a>";
-                                    echo "</td>";
+                                    if($_SESSION['usertype'] == "ADMINISTRATOR" || $_SESSION['usertype'] == "TECHNICAL"){
+                                        echo "<td class='actions'>";
+                                        echo "<a href='update-equipment.php?assetnumber=" . $row['assetnumber'] . "'><svg class='update' xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"icon icon-tabler icons-tabler-outline icon-tabler-pencil-check\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4\" /><path d=\"M13.5 6.5l4 4\" /><path d=\"M15 19l2 2l4 -4\" /></svg></a>";
+                                        
+                                        echo "<a href='#' onclick='confirmDelete(\"" . $row['assetnumber'] . "\")'><svg class='delete' xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"icon icon-tabler icons-tabler-outline icon-tabler-circle-minus\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0\" /><path d=\"M9 12l6 0\" /></svg></a>";
+                                        echo "</td>";
+                                    }
+                                   
                                     echo "</tr>";
                                 }
                                 echo "</table>";
@@ -323,8 +340,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btncreate'])) {
                     <span class="close" onclick="closeModal('deleteModal')">&times;</span>
                     <h2>Delete Equipment</h2>
                     <p>Are you sure you want to delete this equipment?</p>
-                    <form id="deleteForm" action="delete-account.php" method="POST">
-                        <input type="hidden" name="txtassetnumbe" id="deleteAssetNumber">
+                    <form id="deleteForm" action="delete-equipment.php" method="POST">
+                        <input type="hidden" name="txtassetnumber" id="deleteAssetNumber">
                         <div class="form__btns">
                             <input type="submit" value="Yes" name="btnsubmit">
                             <button type="button" onclick="closeModal('deleteModal')">Cancel</button>

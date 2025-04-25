@@ -125,9 +125,14 @@ if (isset($_POST['btnsave'])) {
                             <div class="form__branch">
                                 <h2>Branch</h2>
                                 <select name="txtbranch" required>
-                                    <option value="">Current: <?php echo $equipment['branch']; ?></option>
-                                    <option value="Branch1">Branch1</option>
-                                    <option value="Branch2">Branch2</option>
+                                <option value="">Current: <?php echo $equipment['branch'];?></option>
+                                    <option value="Juan Sumulong Campus">Juan Sumulong Campus (Legarda, Manila)</option>
+                                    <option value="Jose Abad Santos Campus">Jose Abad Santos Campus (Pasay)</option>
+                                    <option value="Apolinario Mabini Campus">Apolinario Mabini Campus (Pasay - School of Law)</option>
+                                    <option value="Andres Bonifacio Campus">Andres Bonifacio Campus (Pasig)</option>
+                                    <option value="Plaridel Campus">Plaridel Campus (Mandaluyong)</option>
+                                    <option value="Jose Rizal Campus">Jose Rizal Campus (Malabon)</option>
+                                    <option value="Elisa Esguerra Campus">Elisa Esguerra Campus (Malabon)</option>
                                     <!-- Add all branches of AU -->
                                 </select>
                             </div>
@@ -136,9 +141,58 @@ if (isset($_POST['btnsave'])) {
                                 <h2>Department</h2>
                                 <select name="txtdepartment" required>
                                     <option value="">Current: <?php echo $equipment['department']; ?></option>
-                                    <option value="Department1">Department1</option>
-                                    <option value="Department2">Department2</option>
-                                    <!-- Add all colleges and offices of AU -->
+                                    
+  <optgroup label="Juan Sumulong Campus">
+    <option value="School of Law">School of Law</option>
+    <option value="School of Education">School of Education</option>
+    <option value="School of Business">School of Business</option>
+    <option value="Senior High School">Senior High School</option>
+    <option value="Registrar">Registrar</option>
+    <option value="Library">Library</option>
+    <option value="IT Office">IT Office</option>
+  </optgroup>
+
+  <optgroup label="Jose Abad Santos Campus">
+    <option value="College of Nursing">College of Nursing</option>
+    <option value="Senior High School">Senior High School</option>
+    <option value="Registrar">Registrar</option>
+    <option value="Library">Library</option>
+    <option value="Guidance Office">Guidance Office</option>
+  </optgroup>
+
+  <optgroup label="Apolinario Mabini Campus">
+    <option value="School of Law">School of Law</option>
+    <option value="Registrar">Registrar</option>
+    <option value="Library">Library</option>
+  </optgroup>
+
+  <optgroup label="Andres Bonifacio Campus">
+    <option value="School of Education">School of Education</option>
+    <option value="College of Information Tech">College of Information Tech</option>
+    <option value="Registrar">Registrar</option>
+    <option value="Library">Library</option>
+    <option value="Clinic">Clinic</option>
+  </optgroup>
+
+  <optgroup label="Plaridel Campus">
+    <option value="College of Hospitality">College of Hospitality</option>
+    <option value="Registrar">Registrar</option>
+    <option value="Library">Library</option>
+    <option value="Finance Office">Finance Office</option>
+  </optgroup>
+
+  <optgroup label="Jose Rizal Campus">
+    <option value="Basic Education">Basic Education</option>
+    <option value="Senior High School">Senior High School</option>
+    <option value="Registrar">Registrar</option>
+    <option value="Library">Library</option>
+  </optgroup>
+
+  <optgroup label="Elisa Esguerra Campus">
+    <option value="Senior High School">Senior High School</option>
+    <option value="Registrar">Registrar</option>
+    <option value="Library">Library</option>
+  </optgroup>
                                 </select>
                             </div>
 

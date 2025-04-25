@@ -1,6 +1,30 @@
 <?php
 require_once './config.php';
 include './session-checker.php';
+
+// Initialize variables for counts
+$accountsCount = $equipmentsCount = $ticketsCount = 0;
+
+// Fetch the count of accounts
+$sql = "SELECT COUNT(*) AS count FROM tblaccounts";
+if ($result = mysqli_query($link, $sql)) {
+    $row = mysqli_fetch_assoc($result);
+    $accountsCount = $row['count'];
+}
+
+// Fetch the count of equipments
+$sql = "SELECT COUNT(*) AS count FROM tblequipments";
+if ($result = mysqli_query($link, $sql)) {
+    $row = mysqli_fetch_assoc($result);
+    $equipmentsCount = $row['count'];
+}
+
+// Fetch the count of tickets
+$sql = "SELECT COUNT(*) AS count FROM tbltickets";
+if ($result = mysqli_query($link, $sql)) {
+    $row = mysqli_fetch_assoc($result);
+    $ticketsCount = $row['count'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,13 +42,13 @@ include './session-checker.php';
 </head>
 
 <body>
-    <nav class="sidebar close">
+    <nav class="sidebar">
         <header class="sidebar_header">
             <i class="toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right-pipe">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left-pipe">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M6 6l6 6l-6 6" />
-                    <path d="M17 5v13" />
+                    <path d="M7 6v12" />
+                    <path d="M18 6l-6 6l6 6" />
                 </svg>
             </i>
             <li class="welcome">
@@ -125,6 +149,18 @@ include './session-checker.php';
                             <span class='text nav-text'>Home</span></a>";
                             echo "</li>";
                             echo "<li class='nav-link'>";
+                            echo "<a href='../equipment/equipment-management.php'>
+                            <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-package'>
+                                <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
+                                <path d='M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5' />
+                                <path d='M12 12l8 -4.5' />
+                                <path d='M12 12l0 9' />
+                                <path d='M12 12l-8 -4.5' />
+                                <path d='M16 5.25l-8 4.5' />
+                            </svg>
+                            <span class='text nav-text'>Equiments</span></a>";
+                            echo "</li>";
+                            echo "<li class='nav-link'>";
                             echo "<a href='../ticket/ticket-management.php'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-ticket'>
                                 <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
@@ -142,10 +178,6 @@ include './session-checker.php';
                             break;
                     }
                     ?>
-                    <li class="nav-link">
-
-                    </li>
-
                 </ul>
             </div>
             <div class="logout">
@@ -169,15 +201,31 @@ include './session-checker.php';
                 <div class="logo">
                 </div>
                 <div class="page-title">
-                <img src="../../src/images/au_logo.png" alt="Arellano University Logo">
+                    <img src="../../src/images/au_logo.png" alt="Arellano University Logo">
                     <h1>AU Technical Support Management System</h1>
                 </div>
-
-
             </header>
             <div class="main-content">
-
-
+                <div class="card">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                        <p style="text-align: center;"></p>
+                    </div>
+                    <div class="main-data">
+                        <button class="data-card">
+                            <h2>Total Accounts</h2>
+                            <p><?php echo $accountsCount; ?></p>
+                        </button>
+                        <button class="data-card">
+                            <h2>Total Equipments</h2>
+                            <p><?php echo $equipmentsCount; ?></p>
+                        </button>
+                        <button class="data-card">
+                            <h2>Total Tickets</h2>
+                            <p><?php echo $ticketsCount; ?></p>
+                        </button>
+                    </div>
+                </div>
             </div>
             <footer>
                 <p>&copy; Copyright <span id="year"></span> AU Technical Support Management System. All Rights Reserved.

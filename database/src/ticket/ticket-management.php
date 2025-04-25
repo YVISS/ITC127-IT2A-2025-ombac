@@ -42,13 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnsearch'])) {
 </head>
 
 <body>
-    <nav class="sidebar close">
+<nav class="sidebar">
         <header class="sidebar_header">
             <i class="toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right-pipe">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M6 6l6 6l-6 6" />
-                    <path d="M17 5v13" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left-pipe">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M7 6v12" />
+                    <path d="M18 6l-6 6l6 6" />
                 </svg>
             </i>
             <li class="welcome">
@@ -149,6 +149,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnsearch'])) {
                             <span class='text nav-text'>Home</span></a>";
                             echo "</li>";
                             echo "<li class='nav-link'>";
+                            echo "<a href='../equipment/equipment-management.php'>
+                            <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-package'>
+                                <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
+                                <path d='M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5' />
+                                <path d='M12 12l8 -4.5' />
+                                <path d='M12 12l0 9' />
+                                <path d='M12 12l-8 -4.5' />
+                                <path d='M16 5.25l-8 4.5' />
+                            </svg>
+                            <span class='text nav-text'>Equiments</span></a>";
+                            echo "</li>";
+                            echo "<li class='nav-link'>";
                             echo "<a href='../ticket/ticket-management.php'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-ticket'>
                                 <path stroke='none' d='M0 0h24v24H0z' fill='none'/>
@@ -204,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnsearch'])) {
                     <div id="php_error" class="error">
                         <?php
                         if (isset($_GET['updatemsg'])) {
-                            echo "<div class='msg' style='color: green;'>" . htmlspecialchars($_GET['updatemsg']) . "</div>";
+                            echo "<div class='msg' style='color: lightgreen;'>" . htmlspecialchars($_GET['updatemsg']) . "</div>";
                         }
                         if (isset($_GET['errormsg'])) {
                             echo "<div class='msg' style='color: red;'>" . htmlspecialchars($_GET['errormsg']) . "</div>";
@@ -217,6 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnsearch'])) {
                                 
                                 <button type="button" onclick="window.location.href='create-ticket.php'">Create Ticket</button>
                                 <input type="text" name="txtsearch" placeholder="Search...">
+                
                                 <button type="submit" name="btnsearch">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -421,6 +434,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnsearch'])) {
         sidebar = body.querySelector(".sidebar"),
         toggle = sidebar.querySelector(".toggle");
 
+        setTimeout(() => {
+        if (errormsg) {
+            errormsg.style.transition = "opacity 1s";
+            errormsg.style.opacity = "0";
+            setTimeout(() => errormsg.style.display = none, 1000);
+        }
+    }, 3000);
+
 
         function confirmDelete(ticketnumber) {
             document.getElementById('deleteTicketNumber').value = ticketnumber;
@@ -484,6 +505,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnsearch'])) {
                 </svg>`;
         }
     });
+
+
     </script>
 </body>
 
